@@ -1,0 +1,10 @@
+<div class="cms-posts media-container">
+  <div class="row">
+    {% for post in posts limit: 6 %}
+      {% capture partial_path %}spree/shared/content_feed/{{ post.type }}{% endcapture %}
+      <div class="col-12 col-lg-4">
+        {% include partial_path with post %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

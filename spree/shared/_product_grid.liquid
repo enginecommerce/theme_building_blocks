@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+      {% if product.is_sellable? %}
+        {% assign partial_product = product %}
+        {% include 'spree/shared/product' with partial_product %}
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% unless products.last_page? %}
+    <div class="row">
+      <div class="col-12">
+        <a href="{{ next_page_url }}" class="next-page-link">
+          Next Page >
+        </a>
+      </div>
+    </div>
+  {% endunless %}
+</div>
+
+{% include 'spree/shared/enable_quicklook' %}

@@ -1,0 +1,20 @@
+<div class="modal fade modify-subscription-modal" id="modify-subscription" tabindex="-1" role="dialog" aria-labelledby="Modify Subscription Confirm" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modify-modal-header">
+        <div class="row">
+          <div class="col text-right pr-5" data-dismiss="modal">
+            <span class="fa fa-times" />
+          </div>
+        </div>
+        <div class="row">
+          <p class="col">EDIT DELIVERY DATE</p>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        {% include 'spree/users/delay_select_content' %}
+        {% include 'spree/users/delay_confirm_content' %}
+      </div>
+    </div>
+  </div>
+</div>

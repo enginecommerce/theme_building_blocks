@@ -1,0 +1,47 @@
+<div id="delay-confirm-content" class="d-none">
+  <div class="row">
+    <h5 class="col confirm-new-date">
+      Confirm new delivery date
+    </h5>
+  </div>
+  <div class="row">
+    <div id="delayed-actionable-date" class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button id="confirm-delay-button" class="btn btn-secondary">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+ document.addEventListener("DOMContentLoaded", function(){
+   $('#confirm-delay-button').on('click', function(event) {
+     let subscriptionId = $('.modify-subscription-modal.show').data('subscriptionId')
+     let modifyButton = $(`#modify-subscription-${subscriptionId}`)
+     let delayedActionableDate = $('#delay-confirm-content').data('delayedActionableDate')
+     let formattedDate = new Date(delayedActionableDate).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })
+     let successMessage = $(`#subscription-${subscriptionId}-modify-success`)
+
+     $.ajax({
+       url: `subscriptions/api/v1/subscriptions/${subscriptionId}`,
+       headers: {
+        'X-Spree-Token': userToken
+       },
+       method: 'put',
+       data: { subscription: { actionable_date: delayedActionableDate } },
+       success: function(response) {
+         modifyButton.data('actionableDate', delayedActionableDate)
+         $('.modify-subscription-modal').modal('hide')
+         successMessage.removeClass('d-none')
+         successMessage.text(`Subscription delayed until ${formattedDate}`)
+       },
+       error: function(error) {
+         $(`#subscription-${subscriptionId}-modify-error`).removeClass('d-none')
+       }
+     });
+   });
+ })
+
+</script>

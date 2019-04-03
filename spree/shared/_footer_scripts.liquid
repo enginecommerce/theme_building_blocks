@@ -1,0 +1,16 @@
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  /* Populate the cart via AJAX */
+  window.updateCartLink = function(callback) {
+    var cart_xhr = new XMLHttpRequest()
+    cart_xhr.open("GET", "/cart_link");
+    cart_xhr.responseType = 'document';
+    cart_xhr.onload = function() {
+      $(".cart-number").html(this.responseXML.body.innerHTML);
+      if (callback) callback();
+    };
+    cart_xhr.send();
+  };
+  updateCartLink();
+});
+</script>

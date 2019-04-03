@@ -1,0 +1,4 @@
+{% comment %} This is used to populate the cart number {% endcomment %}
+{% if current_order.item_count > 0 %}
+  <span class="cart-count">{{ current_order.item_count }}</span>
+{% endif %}

@@ -1,0 +1,24 @@
+<div class="media-card instagram">
+  <a href="{{ post.url }}">
+    <div class="media-card-image" style="background-image: url({{ post.instagram_post.image_url }});">
+    </div>
+    <div class="media-card-text">
+      <h6 class="card-title">
+        <i class="fab fa-instagram"></i>
+        {{ post.title | truncate: 20 }}
+      </h6>
+      <div class="published-at">{{ post.published_at | date: "%a, %b %d, %Y" }}</div>
+      {% if post.description %}
+        <p class="description">{{ post.description }}</p>
+      {% endif %}
+      <div class="row justify-space-between">
+        <div class="card-author col">
+          <a href="https://www.instagram.com/{{ post.instagram_post.author }}/">
+            @{{ post.instagram_post.author | truncate: 20 }}
+          </a>
+        </div>
+      </div>
+      <a class="call-to-action" href="{{ post.url }}">More &gt;</a>
+    </div>
+  </a> 
+</div>

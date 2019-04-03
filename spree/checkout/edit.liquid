@@ -1,0 +1,14 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        {% include 'spree/shared/logo' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="checkout-edit">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1jeg82vVIEj3ncwsbRrxQkDsnyCstfg4&libraries=places"></script>
+  <div data-react-class="CheckoutContainer" data-react-props="{{ order.checkout_json_payload | html_escape }}"></div>
+</div>

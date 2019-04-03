@@ -1,0 +1,110 @@
+{% csrf_token %}
+<div class="container product-show">
+  <div class="row">
+    <div class="col-lg-6 product-images {{ settings.text.product_show_image_position }} {{ settings.text.carousel_position }}">
+      {% include 'spree/shared/product_image_carousel' %}
+    </div>
+    <div class="col details-and-cart">
+      <div class="row product-details">
+        <h1 class="product-name" id="product-show-product-name">{{ product.name }}</h1>
+        <div class="product-price col-12" id="product-show-product-price">{{ product.price }}</div>
+        <div class="product-description col-12" id="product-show-product-description">{{ product.description }}</div>
+      </div>
+      <div class="row add-to-cart" id="product-show-add-to-cart-button">
+        <div class="col" data-react-class="AddToCartForm" data-react-props="{{ product_json_full | html_escape }}"></div>
+        <div class="col errors"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script id="event-bindings">
+let showError = function(message) {
+  $(".errors").html(message)
+}
+
+let hideError = function(message) {
+  $(".errors").html("")
+}
+
+document.body.addEventListener("product:add_to_cart:start", function (event) {
+  hideError()
+});
+
+document.body.addEventListener("product:add_to_cart:no_variant", function(event) {
+  showError(event.detail.message)
+});
+
+document.body.addEventListener("product:add_to_cart:success", function (event) {
+  hideError()
+  window.updateCartLink(function(){ $('#addToCartModal').modal('show') })
+});
+
+document.body.addEventListener("product:add_to_cart:failure", function (event) {
+  showError(event.detail.message)
+});
+
+document.body.addEventListener("product:add_to_cart:complete", function (event) {
+  /* hide hypothetical custom spinner element, etc. */
+});
+
+document.body.addEventListener("product:variant:selected", function (event) {
+  let variant = event.detail.variant;
+  hideError()
+  // swap out price
+  $(".product-price").html("$"+event.detail.pretty_price);
+  // show the variant's image
+  let first_image_id = variant.image_ids[0]
+  if (first_image_id) {
+    let $thumbnail = $('.carousel-thumbnail[data-id="'+first_image_id+'"]');
+    $thumbnail.click();
+  }
+});
+
+document.body.addEventListener("product:color:selected", function (event) {
+  var first_image_id = event.detail.image_id;
+  if (first_image_id) {
+    let $thumbnail = $('.carousel-thumbnail[data-id="'+first_image_id+'"]');
+    $thumbnail.click();
+  }
+})
+
+document.body.addEventListener("product:variant:unavailable", function (event) {
+  showError(event.detail.message)
+});
+
+</script>
+
+<script id="carousel">
+(function(){
+  var currentScrollFunction;
+
+  let nudge = function(increment, target) {
+    return function() {
+      target.scrollLeft += increment
+    }
+  }
+
+  let scrollLeft = function(event){
+    let scrollTarget = document.getElementById(event.currentTarget.getAttribute("data-target"))
+    currentScrollFunction = setInterval(nudge(-8, scrollTarget), 30)
+  }
+
+  let scrollRight = function(event){
+    let scrollTarget = document.getElementById(event.currentTarget.getAttribute("data-target"))
+    currentScrollFunction = setInterval(nudge(8, scrollTarget), 30)
+  }
+
+  let stopScrolling = function() {
+    clearInterval(currentScrollFunction)
+  }
+
+  $(".scroll-forward").mousedown(scrollRight)
+  $(".scroll-forward").mouseup(stopScrolling)
+  $(".scroll-forward").mouseout(stopScrolling)
+  $(".scroll-back").mousedown(scrollLeft)
+  $(".scroll-back").mouseup(stopScrolling)
+  $(".scroll-back").mouseout(stopScrolling)
+})()
+</script>

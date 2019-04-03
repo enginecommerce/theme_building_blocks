@@ -1,0 +1,19 @@
+<div class="product-block-feature quicklook-target" data-product-id="{{ product.id }}">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="product-img">
+        <img src="{{ product.display_image_large_url }}" alt="{{ product.display_image_alt }}">
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="product-details">
+        <div class="product-title">
+          <h4>{{ product.name }}</h4>
+        </div>
+        <div class="product-description">
+          <p>{{ product.description | truncate: 75 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

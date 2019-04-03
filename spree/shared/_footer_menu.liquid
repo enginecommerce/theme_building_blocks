@@ -1,0 +1,22 @@
+{% comment %} 
+  Dividing 12 by the total number of menu_items to get correct bootstrap column sizes 
+  (assuming this partial is rendered inside of a row by itself)
+{% endcomment %}
+{% assign footer_items_size = footer_menu.menu_items | size %}
+{% if footer_items_size > 0 %}
+  {% assign width = 12 | divided_by: footer_items_size | floor %}
+{% endif %}
+{% assign footer_items = footer_menu.menu_items | sort: "sort" %}
+{% for footer_item in footer_items %}
+  <div class="col-lg-{{ width }}">
+    <div class="footer-menu-section">
+      <div class="title">{{ footer_item.name }}</div>
+      {% assign footer_sub_items = footer_item.sub_menu_items | sort: "sort" %}
+      {% for sub_item in footer_sub_items %}
+        <a href="{{ sub_item.path }}">
+          {{ sub_item.name }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}

@@ -1,0 +1,128 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+        <a href="/">Home</a>
+        <span>{{ settings.text.cart_header_text }}</span>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h1 class="page-title" id="cart-header">
+          {{ settings.text.cart_header_text }}
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  {% form update_cart %}
+    <input name="_method" value="patch" type="hidden">
+    <div class="row cart-main">
+      <div class="col-md-5 col-lg-4 cart-coupon {{ settings.text.cart_promo_position }}">
+        {% if current_order and order.price_adjustments["promotions"] == blank %}
+          <div class="sidebar-pill cart-promo">
+            <h4>Have a Promo Code?</h4>
+            <input id="coupon-code" class="coupon-code" name="order[coupon_code]" title="Coupon Code" value="" placeholder="Promo Code" type="text">
+            <input class="btn btn-primary btn-primary-gray" name="coupon_code" value="Apply" type="submit">
+          </div>
+        {% endif %}
+        {% if current_order and order.price_adjustments["promotions"] != blank %}
+          <div class="sidebar-pill cart-promo">
+            <h4>Coupon Applied!</h4>
+            {% assign adjustments = order.price_adjustments %}
+            {% for item in adjustments["promotions"] %}
+              <p class="applied-promotion">
+                <span class="promotion-label">{{ item["label"] }}</span>
+              </p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-md-7 col-lg-8 cart-items">
+        {% if current_order and current_order.item_count > 0 %}
+          <p class="item-count">You have {{ current_order.item_count }} item(s) in your cart.</p>
+          <table>
+            {% for item in current_order.line_items %}
+              <tr class="cart-item">
+                <td>
+                  <img class="thumbnail" src="{{ item.thumbnail_url }}" alt="{{ item.name }}">
+                </td>
+                <td class="name-and-details">
+                  <a class="product-name" href="{{ item.product.path }}">
+                    {{ item.name }}
+                  </a>
+                  <div class="product-details">
+                    {% for option in item.variant.options_hash %}
+                      <span class="variant-option">
+                        <span class="option-name">{{ option[0] }}:</span>
+                        <span class="option-value">{{ option[1] }}</span>
+                      </span>
+                    {% endfor %}
+                  </div>
+                  <div class="actions">
+                    <a class="product-remove-button" data-id="{{ item.id }}" alt="Remove {{ item.name }}">
+                      Remove
+                    </a>
+                  </div>
+                </td>
+                <td class="product-quantity">
+                  <input name="order[line_items_attributes][{{ forloop.index0 }}][id]" value="{{ item.id }}" type="hidden">
+                  <input class="quantity input-lg" data-id="{{ item.id }}" step="1" min="0" name="order[line_items_attributes][{{ forloop.index0 }}][quantity]" value="{{ item.quantity }}" type="number" title="Quantity">
+                </td>
+                <td class="product-price">
+                  {{ item.display_amount }}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+          <div class="cart-totals">
+            <div class="adjustments">
+              {% assign adjustments = order.price_adjustments %}
+              {% for item in adjustments["promotions"] %}
+                <div class="remove-promotion" data-react-class="RemovePromotion" data-react-props="{{ item['removalJson'] | html_escape }}"></div>
+                <span class="promotion-label">{{ item["label"] }}:</span>
+                <span class="promotion-amount">{{ item["total"] }}</span>
+              {% endfor %}
+            </div>
+            <div class="subtotal">
+              <span class="subtotal-label">
+                Subtotal:
+              </span>
+              <span class="order-total">
+                ${{ order.display_order_total }}
+              </span>
+            </div>
+          </div>
+          <div class="cart-actions">
+            <input class="btn btn-secondary" name="button" value="Update" type="submit">
+            <input class="btn btn-primary btn-primary-gray btn-checkout" name="checkout" value="Checkout" type="submit">
+          </div>
+        {% else %}
+          <p class="empty-cart">
+            Your Cart is Empty<br>
+            <a href="/products" class="btn btn-primary" style="display: inline-block;">Keep Shopping &gt;</a>
+          <p>
+        {% endif %}
+      </div>
+    </div>
+  {% endform %}
+</div>
+<script>
+  // Remove item from cart
+  // find the corresponding quantity field, set its value to 0, and submit the form
+  const delete_buttons = document.querySelectorAll(".product-remove-button")
+  delete_buttons.forEach(button => {
+    button.addEventListener("click", function(e) {
+      const id = this.getAttribute("data-id")
+      const quantity_selector = `input.quantity[data-id="${ id }"]`
+      const quantity = document.querySelector(quantity_selector)
+      const form = document.querySelector("form#update-cart")
+      quantity.value = 0
+      form.submit()
+    })
+  })
+</script>

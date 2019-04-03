@@ -1,0 +1,18 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+          <a href="/">Home</a>
+          <a href="/products">Products</a>
+          {% if product.category %}
+            <a href="/{{ product.category.permalink }}">{{ product.category.name }}</a>
+          {% endif %}
+          <span>{{ product.name }}</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'spree/shared/product_show' %}

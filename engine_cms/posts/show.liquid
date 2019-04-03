@@ -1,0 +1,8 @@
+{% case post.type %}
+  {% when 'custom_page' %}
+    {% include 'engine_cms/posts/show_custom_page_post', post: post %}
+  {% when 'blog' %}
+    {% include 'engine_cms/posts/show_blog_post', post: post %}
+  {% when 'youtube' %}
+    {% include 'engine_cms/posts/show_youtube_post', post: post %}
+{% endcase %}

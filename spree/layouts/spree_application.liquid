@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'spree/shared/head' %}
+  </head>
+  <body class="{{ body_classes }}">
+    <div class="outer-container">
+      {% tracking_scripts_body_start %}
+
+      {% include 'spree/shared/flash_messages' %}
+
+      {% include 'spree/shared/header' %}
+
+      {{ content_for_layout }}
+
+      {% include 'spree/shared/footer' %}
+
+      {% yield end_of_body %}
+
+      {% tracking_scripts_body_end %}
+    </div>
+  </body>
+</html>

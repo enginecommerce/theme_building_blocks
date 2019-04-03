@@ -1,0 +1,44 @@
+<div class="modal fade" id="skip-confirm-modal" tabindex="-1" role="dialog" aria-labelledby="Skip Subscription Confirm" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-right" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h6 class="modal-title">Are you sure you would like to skip your next subscription delivery?</h6>
+      </div>
+      <div class="modal-body">
+        <div id="confirm-skip-button" class="btn btn-secondary skip-subscription-button">Skip delivery</div>
+        <div class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    $('#confirm-skip-button').on('click', function(event) {
+      let subscriptionId = $('.modal.show').data('subscriptionId');
+      let subscriptionSpinner = $(`#subscription-${subscriptionId}-spinner`);
+      let errorMessage = $(`#subscription-${subscriptionId}-skip-error`);
+      let successMessage = $(`#subscription-${subscriptionId}-skip-success`);
+
+      $.ajax({
+        url: `subscriptions/api/v1/subscriptions/${subscriptionId}/skip`,
+        headers: {
+         'X-Spree-Token': userToken
+        },
+        method: 'post',
+        success: function(response) {
+          subscriptionSpinner.addClass('d-none');
+          errorMessage.addClass('d-none');
+          actionableDate = new Date(response.actionable_date);
+          successMessage.text(`Subscription skipped until ${actionableDate.toDateString()}`);
+          successMessage.removeClass('d-none');
+          $('.modal.show').modal('hide');
+        },
+        error: function(error) {
+          subscriptionSpinner.addClass('d-none');
+          errorMessage.removeClass('d-none');
+        }
+      });
+    });
+  })
+</script>

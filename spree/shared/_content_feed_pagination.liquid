@@ -1,0 +1,5 @@
+{% unless posts.last_page? %}
+  <div class="pagination-container col-12 d-flex align-items-end justify-content-end">
+    <a class="next-page-link btn btn-primary" href="{% next_page_url %}">Next Page ></a>
+  </div>
+{% endunless %}

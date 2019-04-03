@@ -1,0 +1,26 @@
+<div class="blog-index">
+  <div class="hero-container content-header">
+    {% for post in posts limit: 1 %}
+      <div class="container featured-product">
+        <div class="backsplash"style="background-image:url('{{ post.main_image_large_url }}')"></div>
+        <div class="content">
+          <nav class="breadcrumb-link">
+            <a href="/">Home</a>
+            <a href="/blog">Blog</a>
+          </nav>
+          <hr>
+          <h2 class="post-title">{{ category.name }}</h2>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="container">
+    <div class='blog-list'>
+      <div class="row">
+        {% include "spree/shared/content_feed" %}
+        {% include "spree/shared/content_feed_pagination" %}
+        {% include "spree/shared/content_feed_count" %}
+      </div>
+    </div>
+  </div>
+</div>

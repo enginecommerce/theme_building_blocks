@@ -1,0 +1,13 @@
+{% include 'spree/shared/head' %}
+{% include 'spree/shared/product_show' %}
+<script>
+
+window.addEventListener("load", e => {
+  window.parent.postMessage({ eventType: "quicklook:loaded" }, "*")
+})
+
+document.body.addEventListener("product:add_to_cart:success", e => {
+  window.parent.postMessage({ eventType: "quicklook:added" }, "*")
+})
+
+</script>

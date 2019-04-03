@@ -1,0 +1,57 @@
+<div id="delay-select-content">
+  <div class="row">
+    <h5 class="col modal-title text-center">I want to delay my delivery by...</h5>
+  </div>
+  <button class="btn-option delay-option row">
+    <div class="col pull-left font-weight-bold">1 week</div>
+    <div class="col pull-right actionable-date"></div>
+  </button>
+  <button class="btn-option delay-option row">
+    <div class="col pull-left font-weight-bold">2 weeks</div>
+    <div class="col pull-right actionable-date"></div>
+  </button>
+  <button class="btn-option delay-option row">
+    <div class="col pull-left font-weight-bold">3 weeks</div>
+    <div class="col pull-right actionable-date"></div>
+  </button>
+  <button class="btn-option delay-option row">
+    <div class="col pull-left font-weight-bold">4 weeks</div>
+    <div class="col pull-right actionable-date"></div>
+  </button>
+</div>
+
+<script>
+
+ document.addEventListener("DOMContentLoaded", function(){
+   $('.modify-subscription-button').on('click', function(event) {
+     let subscriptionId = $(event.currentTarget).data('subscriptionId');
+     let actionableDate = new Date($(event.currentTarget).data('actionableDate'));
+     let modalId = $(event.currentTarget).data('target');
+     let modal = $(`${modalId}`);
+
+     modal.data('subscriptionId', subscriptionId)
+     modal.data('actionableDate', actionableDate)
+     modal.find('#delay-select-content').show()
+     modal.find('#delay-confirm-content').addClass('d-none')
+     modal.modal()
+
+     $('.actionable-date').each(function(index, actionableDateElement) {
+       newDate = new Date(actionableDate.setDate(actionableDate.getDate() + ((index + 1) * 7)))
+       $(actionableDateElement).data('actionableDate', newDate.toString())
+       $(actionableDateElement).text(newDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }))
+     })
+
+     $('.delay-option').on('click', function(event) {
+       let delayOption = $(event.currentTarget)
+       let delayedActionableDate = delayOption.find('.actionable-date').data('actionableDate')
+
+       $('#delay-select-content').hide(300, function() {
+         $('#delay-confirm-content').removeClass('d-none')
+         $('#delay-confirm-content').data('delayedActionableDate', delayedActionableDate)
+         $('#delayed-actionable-date').text(delayOption.find('.actionable-date').text())
+       })
+     })
+   })
+ });
+
+</script>

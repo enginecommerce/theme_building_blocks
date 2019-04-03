@@ -1,0 +1,24 @@
+<div class="col-xl-9 product-column">
+  <div class="product-single-container product-block">
+      <div class="product-single">
+        <div class="product-display">
+          <div class="product-img quicklook-target" data-product-id="{{ product.id }}">
+            <img src="{{ partial_product.display_image_large_url }}" alt="{{ partial_product.display_image_alt }}">
+            <div class="quick-view">
+              <a href="{{ product.path }}" class="btn btn-secondary">
+                View Product
+              </a>
+            </div>
+          </div>
+          <div class="product-details">
+            <a href="{{ partial_product.path }}">
+              <h5 class="name">{{ partial_product.name }}</h5>
+            </a>
+            <h4 class="price">{{ partial_product.price }}</h4>
+            <p class="description">{{ partial_product.description | truncate: 280 }}</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<div class="carousel" id="product-carousel-{{ product.id }}">
+  <div class="carousel-inner">
+    {% for image in product.variant_images %}
+    <div class="carousel-item {% if forloop.index0 == 0 %} active {% endif %}">
+      <img src="{{ image.large_url }}" alt="{% if image.alt == empty %}{{ product.name }}{% else %}{{ image.alt }}{% endif %}">
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="thumbnail-container d-flex align-items-center justify-content-center">
+  <div class="scroll-back" data-target="carousel-thumbnails-{{ product.id }}"><img src="{{ "img/arrow-left.png" | asset_url }}" draggable="false"></div>
+  <ol class="carousel-thumbnails" id="carousel-thumbnails-{{ product.id }}">
+    {% for image in product.variant_images %}
+    <li>
+      <img src="{{ image.small_url }}" data-id="{{ image.id }}" data-target="#product-carousel-{{ product.id }}" data-slide-to="{{ forloop.index0 }}"
+           class="carousel-thumbnail {% if forloop.index0 == 0 %} active{% endif %}">
+    </li>
+    {% endfor %}
+  </ol>
+  <div class="scroll-forward" data-target="carousel-thumbnails-{{ product.id }}"><img draggable="false" src="{{ "img/arrow-right.png" | asset_url }}"></div>
+</div>

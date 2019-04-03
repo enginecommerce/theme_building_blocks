@@ -1,0 +1,36 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+          <a href="/">Home</a>
+          <span>{{ settings.text.collections_message_header }}</span>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h1 class="page-title" id="collections-header">
+          {{ settings.text.collections_message_header }}
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product-grid products-index">
+  {% include 'spree/shared/product_grid' %}
+</div>
+
+<div class="divider">
+</div>
+
+<div class="content-feed-container product-grid-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {% include "spree/shared/content_feed" with posts %}
+      </div>
+    </div>
+  </div>
+</div>

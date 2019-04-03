@@ -1,0 +1,56 @@
+<footer class="main-footer">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div id="footer-logo-social" class="col-lg-3">
+        <div class="row justify-content-between">
+          <div class="col">
+            <div class="row justify-content-center">
+              {% include 'spree/shared/logo' %}
+            </div>
+            <div class="row justify-content-center">
+              <div class="social">
+                <a href="#">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#">
+                  <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#">
+                  <i class="fab fa-snapchat-ghost"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer-menu" class="col-lg-auto">
+        <div class="row">
+          {% include 'spree/shared/footer_menu' with footer_menu %}
+        </div>
+      </div>
+      <div class="subscription col-12 col-lg-auto">
+        <div class="title">subscribe</div>
+        <p>
+        <form id="footer-subscribe-form" class="subscribe hovering-submit">
+          <label>Subscribe for daily news. We never spam.</label>
+          <div style="white-space:nowrap;">
+            <input type="email" class="text-field subscribe w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="Enter your email" id="name-2">
+            <input type="submit" value="Go" data-wait="Please wait..." class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col copyright-notice">
+        Copyright Engine | 2018
+      </div>
+    </div>
+  </div>
+  {% include 'spree/shared/footer_scripts' %}
+</footer>
+{% content_for end_of_body %}
+  {% include 'spree/shared/cart_modal' %}
+{% endcontent_for %}

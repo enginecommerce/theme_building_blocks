@@ -1,0 +1,86 @@
+<div class="homepage-container">
+  <div class="hero-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="description">
+            <h1>{{ settings.text.welcome_message_header }}</h1>
+            <p class="p-large">{{ settings.text.welcome_message_sub_header }}</p>
+          </div>
+          <a class="btn btn-primary hero-button" href="{{ settings.text.welcome_button_link }}" role="button">
+            <div class="btn-icon">
+              <img src="{{ settings.image.welcome_button_icon }}" alt="Cart Icon">
+            </div>
+            {{ settings.text.welcome_message_button_text }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-blocks-feature-container">
+    <div class="container">
+      <div class="row">
+        {% for product in products limit: 3 %}
+          <div class="col-md-4">
+            {% include 'spree/shared/product_block_feature' %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="product-blocks-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="title">
+            <h2>New Arrivals</h2>
+          </div>
+        </div>
+        {% for product in products limit: 3 %}
+          <div class="col-lg-4">
+            {% include 'spree/shared/product_block' %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="collection-blocks-container">
+    <div class="container">
+      <div class="row">
+        {% comment %} collection-block-partial {% endcomment %}
+      </div>
+    </div>
+  </div>
+  <div class="product-blocks-simple-container">
+    <div class="container">
+      <div class="row">
+        {% comment %} product-blocks-partial {% endcomment %}
+      </div>
+    </div>
+  </div>
+  <div class="product-blocks-background-container">
+    <div class="container-fluid">
+      <div class="row">
+        {% comment %} product-blocks-background-partial {% endcomment %}
+      </div>
+    </div>
+  </div>
+  <div class="content-feed-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          {% include "spree/shared/content_feed" with posts %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-grid-container">
+    <div class="container-fluid">
+      <div class="row">
+        {% comment %} product-grid-partial {% endcomment %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'spree/shared/enable_quicklook' %}

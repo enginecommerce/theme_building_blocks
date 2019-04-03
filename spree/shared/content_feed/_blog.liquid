@@ -1,0 +1,17 @@
+<div class="media-card blog">
+  <a href="{{ post.url }}">
+    <div class="media-card-image" style="background-image: url({{ post.main_image_medium_url }});">
+    </div>
+    <div class="media-card-text">
+      <h6 class="card-title">
+        <i class="far fa-file-alt"></i>
+        {{ post.title | truncate: 20 }}
+      </h6>
+      <div class="published-at">{{ post.published_at | date: "%a, %b %d, %Y" }}</div>
+      {% if post.description %}
+        <p class="description">{{ post.description }}</p>
+      {% endif %}
+      <a class="call-to-action" href="{{ post.url }}">More &gt;</a>
+    </div>
+  </a> 
+</div>

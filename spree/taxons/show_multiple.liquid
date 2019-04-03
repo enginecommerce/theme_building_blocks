@@ -1,0 +1,34 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+        <a href="/">Home</a>
+        <a href="/products">All Products</a>
+        <span>{{ taxons_title }}</span>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h1 class="page-title">
+          {{ taxons_title }}
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product-grid taxons-show">
+  {% include 'spree/shared/product_grid' %}
+</div>
+
+<div class="content-feed-container product-grid-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {% include "spree/shared/content_feed" with posts %}
+      </div>
+    </div>
+  </div>
+</div>
