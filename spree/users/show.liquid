@@ -1,13 +1,18 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1jeg82vVIEj3ncwsbRrxQkDsnyCstfg4&libraries=places"></script>
-
-<div class="breadcrumb">
+{% csrf_token %}
+<div class="content-header">
   <div class="container">
     <div class="row">
       <div class="col-12">
         <nav class="breadcrumb-link">
           <a href="/">Home</a>
-          <span> / My Account</span>
+          <span>Your Account</span>
         </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h1 class="page-title">Your Account</h1>
       </div>
     </div>
   </div>
@@ -18,25 +23,26 @@
     <div class="user-account-title">
       <div class="row">
         <div class="col-12">
-          <h1>My Account</h1>
+          <h2>Welcome Back, {{ user.login }}!</h2>
+        </div>
+        <div class="col-12">
+          <h4>Store Credits: {{ user.store_credits_total }}</h4>
         </div>
       </div>
     </div>
     <div class="user-account-info">
       <div class="row">
         <div class="col-12">
-          <h2>Account Info</h2>
-          <h4>Email: {{ user.email }}</h4>
           <a class="btn btn-primary" href="/account/edit">Edit email/password</a>
-          <a class="btn btn-primary" href="/logout" role="button">Log Out</a>
+          <a class="btn btn-secondary" href="/logout" role="button">Log Out</a>
         </div>
       </div>
     </div>
     <div class="user-account-orders">
       <div class="row">
         <div class="col-12">
-          <div class="user-orders-title">
-            <h2>My Orders</h2>
+          <div class="user-orders-title text-left">
+            <h2>Past Orders</h2>
           </div>
         </div>
       </div>
@@ -44,37 +50,45 @@
         {% for order in orders %}
           <div class="order">
             <div class="row">
-              <div class="col-md-2">
-                <div class="order-item">
-                  <h6>Order Number</h6>
-                  <h4><a class="btn btn-secondary" href="/orders/{{ order.number }}">{{ order.number }}</a></h4>
-                </div>
+              <div class="col text-left">
+                <h4 class="order-number"><a href="/orders/{{ order.number }}">Order: {{ order.number }}</a></h4>
               </div>
-              <div class="col-md-2">
-                <div class="order-item">
-                  <h6>Order Date</h6>
-                  <h4>{{ order.completed_at_date | date: "%B %d, %Y" }}</h4>
-                </div>
+              <div class="col text-right">
+                <a class="btn btn-secondary" href="/orders/{{ order.number }}">View Details &gt;</a>
               </div>
-              <div class="col-md-2">
+            </div>
+            <div class="row">
+              <div class="col text-left">
+                <h5 class="order-placed">Placed: {{ order.completed_at_date | date: "%B %d, %Y" }}</h5>
+              </div>
+            </div>
+            {% comment %} This looks terrible with only one link.
+            <div class="row">
+              <div class="col text-left actions">
+                <a href="/orders/{{ order.number }}">View Order</a>
+              </div>
+            </div>
+            {% endcomment %}
+            <div class="row">
+              <div class="col">
                 <div class="order-item">
                   <h6>Order Status</h6>
                   <h4>{{ order.state }}</h4>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col">
                 <div class="order-item">
                   <h6>Payment</h6>
                   <h4>{{ order.payment_state }}</h4>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col">
                 <div class="order-item">
                   <h6>Shipment</h6>
                   <h4>{{ order.shipment_state }}</h4>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col">
                 <div class="order-item">
                   <h6>Total</h6>
                   <h4>{{ order.display_total }}</h4>
@@ -93,7 +107,7 @@
         </div>
       {% endunless %}
     </div>
-    <div data-react-class="SubscriptionList" data-react-props="{{ user.active_subscriptions_json | html_escape }}"></div>
+    <div data-react-class="SubscriptionsApp" data-react-props="{{ user.active_subscriptions_json | html_escape }}"></div>
   </div>
 </div>
 

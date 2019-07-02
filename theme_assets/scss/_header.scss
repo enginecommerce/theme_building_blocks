@@ -1,0 +1,50 @@
+.main-header {
+  padding-top: 15px;
+}
+
+#header-search {
+  .search-field {
+    padding-left: 15px;
+    width: 375px;
+  }
+
+  .btn {
+    left: -68px;
+  }
+}
+
+.header-icons {
+
+  flex-wrap: nowrap;
+
+  .cart {
+    position: relative;
+    padding-right: 30px;
+  }
+
+  .cart-number {
+    align-items: center;
+    background-color: map-get($brand-blue, 'primary');
+    border-radius: 30px;
+    color: map-get($brand-white, 'primary');
+    display: flex;
+    font-weight: 700;
+    height: 30px;
+    justify-content: center;
+    position: absolute;
+    right: -4px;
+    width: 30px;
+    &:hover {
+      background-color: map-get($brand-blue, 'dark');
+    }
+    &:empty {
+      display: none;
+    }
+  }
+
+
+  >* {
+    margin: 0 10px;
+  }
+
+}

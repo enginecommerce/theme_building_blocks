@@ -1,0 +1,44 @@
+{
+  "behavior": {
+    "products_per_page": "18",
+    "posts_per_page": "18",
+    "next_posts_per_page": "4",
+    "add_to_cart_becomes_continue": "true",
+    "product_option_selector_style": "Dropdowns"
+  },
+  "color": {
+    "welcome_message_color": "#555555",
+    "welcome_button_color": "#0074d9",
+    "welcome_button_text_color": "#ffffff",
+    "product_header_color": "#555555",
+    "product_show_name_color": "#555555",
+    "product_show_price_color": "#555555",
+    "product_show_description_color": "#555555",
+    "product_show_cart_button_color": "#0077ed",
+    "cart_header_color": "#555555"
+  },
+  "text": {
+    "welcome_message_header": "The Basic Builder E-Commerce",
+    "welcome_message_sub_header": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.",
+    "welcome_message_button_text": "Buy Now",
+    "welcome_message_text_size": "40px",
+    "welcome_sub_header_text_size": "24px",
+    "welcome_button_link": "/products",
+    "collections_message_header": "All Products",
+    "store_name": "Building Blocks",
+    "product_header_text_size": "40px",
+    "product_column_count": "3",
+    "product_show_name_text_size": "40px",
+    "product_show_price_text_size": "26px",
+    "product_show_description_text_size": "18px",
+    "product_show_image_position": "order-first",
+    "carousel_position": "carousel-below",
+    "cart_promo_position": "order-first",
+    "cart_header_text": "Your Cart",
+    "cart_header_text_size": "40px"
+  },
+  "image": {
+    "welcome_hero_image": "../img/placeholder-hero.png",
+    "welcome_button_icon": "../img/icon-cart.png"
+  }
+}

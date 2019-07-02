@@ -1,0 +1,29 @@
+.product-img img {
+  width: 100%;
+}
+
+.product-grid-page.content-feed-container {
+  background: map-get($brand-gray, 'lighter');
+  padding-top: 50px;
+}
+
+.product-single-container {
+  li {
+    list-style-position: inside;
+  }
+}
+
+.next-page-link {
+  display: block;
+  font-family: $font-karla-bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ef4536;
+  text-align: right;
+  padding: 15px 0;
+}
+
+.product-column {
+  flex: 0 0 calc(100% / {{ settings.text.product_column_count }});
+  max-width: calc(100% / {{ settings.text.product_column_count }});
+}

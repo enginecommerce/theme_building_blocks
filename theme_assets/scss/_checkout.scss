@@ -1,0 +1,142 @@
+// Hide Header and Footer on Checkout
+body.controller-checkout {
+  .main-header { display: none; } 
+  .main-footer { display: none; }
+}
+
+.checkout-edit {
+  padding: 15px 0 60px 0;
+
+  h2 {
+    margin: 35px 0;
+  }
+
+  .address-form-outer-container p:first-child, .payment-delivery-outer-container p:first-child {
+    padding-top: 45px;
+  }
+
+  .opaque {
+    opacity: 0.5;
+  }
+
+  .checkout-continue .btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  p, .delivery-form label {
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  .form-control {
+    margin-top: 4px;
+  }
+
+  input[type="checkbox"] {
+    height: auto !important;
+  }
+
+  .summary-container {
+    hr {
+      padding-top: 20px;
+    }
+  }
+
+  h6 {
+    padding-top: 35px;
+  }
+
+  h6, h5 {
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+
+  .summary-item {
+
+    .option-type-container {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-left: 1.5em;
+    }
+  }
+
+  .btn-primary {
+    height: auto;
+  }
+
+  .payment-method-container {
+    padding: 0 2px;
+
+    .payment-method-image {
+      width: 100%;
+    }
+  }
+
+  .paypal-logo-container {
+    padding: 0 2px;
+
+    .paypal-logo {
+      width: 100%;
+    }
+  }
+
+  .delivery-option-wrapper {
+
+    input { display: none }
+
+    label {
+      background-color: map-get($brand-gray, 'lighter');
+      border: 1px solid map-get($brand-gray, 'darker');
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    label:hover {
+      background-color: map-get($brand-white, 'primary');
+    }
+
+    input:checked + label {
+      &::before {
+        content: "✓";
+        display: block;
+        font-size: 30px;
+        color: map-get($brand-blue, 'primary');
+        text-align: center;
+      }
+      background-color: map-get($brand-gray, 'lighter');
+      border: 1px solid map-get($brand-blue, 'primary');
+    }
+
+  }
+
+  .form-check-input, .delivery-option {
+    height: 15px;
+    width: 15px;
+  }
+
+}
+
+.delivery-payment-container {
+
+  .delivery-row {
+    background-color: map-get($brand-white, 'primary');
+    border: 1px solid map-get($brand-white, 'primary');
+    margin: 1rem 0;
+    padding: 1rem;
+
+    .delivery-option-wrapper {
+      margin: .5rem 0;
+
+      .delivery-option {
+        margin: 0 1rem 0 0;
+      }
+
+      p {
+        display: inline;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+#quicklook-modal.loading {
+  .modal-body {
+    background-image: url('/theme_assets/img/loading-circle.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  iframe { display: none; }
+}
+
+#quicklook-modal {
+
+  .modal-dialog {
+     height: 94vh; 
+     max-height: 94vh;
+     width: 94vw;
+     max-width: 94vw;
+    .modal-content {
+      height: 100%;
+      .modal-header {
+        padding: 12px;
+      }
+      .modal-body {
+        height: calc(100% - 42px);
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+
+
+  iframe {
+    border: 0;
+    width: 100%;
+    height: calc(100% - 10px);
+    padding: 0;
+    margin: 0;
+  }
+
+  .close-button {
+    font-family: Karla, sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ef4536;
+  }
+
+}
