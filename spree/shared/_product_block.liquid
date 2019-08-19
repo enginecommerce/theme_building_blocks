@@ -1,13 +1,8 @@
-<div class="product-block quicklook-target" data-product-id="{{ product.id }}">
+<a class="product-block" data-product-id="{{ product.id }}" href="{{ product.path }}">
   <div class="row">
     <div class="col-12">
       <div class="product-img">
         <img src="{{ product.display_image_large_url }}" alt="{{ product.display_image_alt }}">
-        <div class="quick-view">
-          <a class="btn btn-secondary" href="{{ product.path }}" role="button">
-            View Product
-          </a>
-        </div>
       </div>
     </div>
     <div class="col-12">
@@ -15,7 +10,7 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="description">
-              <a href="{{ product.path }}"><h3>{{ product.name }}</h3></a>
+              <h3>{{ product.name }}</h3>
               <p class="p-italic">{{ product.description | truncate: 20 }}</p>
             </div>
           </div>
@@ -28,4 +23,4 @@
       </div>
     </div>
   </div>
-</div>
+</a>

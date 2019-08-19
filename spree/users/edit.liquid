@@ -1,0 +1,32 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+          <a href="/">Home</a>
+          <a href="/account">Your Account</a>
+          <span>Edit Your Account Details</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div class="simple-form">
+    <h2>Edit Your Account Details</h2>
+    {% if user.error_messages %}
+      {% include 'spree/shared/error_messages', target: user %}
+    {% endif %}
+    {% form update_user %}
+      <form>
+        <div class="form-group">
+          <input type="email" class="form-control" id="user_email" name="user[email]" value="{{ user.email }}">
+          <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+          <input type="password" class="form-control" id="user_password_confirmation" placeholder="Confirm Password" name="user[password_confirmation]">
+        </div>
+        <input type="submit" value="Confirm" class="btn btn-primary">
+      </form>
+    {% endform %}
+  </div> 
+</div>

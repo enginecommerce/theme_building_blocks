@@ -1,0 +1,33 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+          <a href="/">Home</a>
+          <a href="/account">Your Account</a>
+          <span>Reset Password</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div class="simple-form">
+    <h2>Change Your Password</h2>
+    <p>Enter and confirm your new password to regain access to your account.</p>
+    {% if spree_user.error_messages %}
+      {% include 'spree/shared/error_messages', target: spree_user %}
+    {% endif %}
+    {% form update_password %}
+      <form>
+        <input type="hidden" name="spree_user[reset_password_token]" value="{{ spree_user.reset_password_token }}">
+        <div class="form-group">
+          <input type="password" class="form-control" id="spree_user_password" name="spree_user[password]" placeholder="New Password">
+          <input type="password" class="form-control" id="spree_user_password_confirmation" name="spree_user[password_confirmation]" placeholder="Confirm New Password">
+        </div>
+        <input type="submit" value="Update Password" class="btn btn-primary btn-primary-beige">
+      </form>
+    {% endform %}
+  </div>
+</div>

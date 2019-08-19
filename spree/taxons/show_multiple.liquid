@@ -2,10 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <nav class="breadcrumb-link">
-        <a href="/">Home</a>
-        <a href="/products">All Products</a>
-        <span>{{ taxons_title }}</span>
+        <nav>
+          {{ breadcrumbs.to_html }}
         </nav>
       </div>
     </div>

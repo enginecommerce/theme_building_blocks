@@ -9,6 +9,6 @@
 </div>
 
 <div class="checkout-edit">
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1jeg82vVIEj3ncwsbRrxQkDsnyCstfg4&libraries=places"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ current_store.google_maps_api_key }}&libraries=places" id="goog"></script>
   <div data-react-class="CheckoutContainer" data-react-props="{{ order.checkout_json_payload | html_escape }}"></div>
 </div>

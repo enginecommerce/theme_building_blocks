@@ -1,0 +1,31 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+          <a href="/">Home</a>
+          <a href="/account">Your Account</a>
+          <span>Reset Password</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div class="simple-form">
+    <h2>Reset Your Password</h2>
+    <p>Enter the email address associated with your account and we'll send you a link to reset your password.</p>
+    {% if spree_user.error_messages %}
+      {% include 'spree/shared/error_messages', target: spree_user %}
+    {% endif %}
+    {% form reset_password %}
+      <form>
+        <div class="form-group">
+          <input type="email" class="form-control" id="spree_user_email" name="spree_user[email]" value="{{ spree_user.email }}" placeholder="Email">
+        </div>
+        <input type="submit" value="Reset Password" class="btn btn-primary btn-primary-beige">
+      </form>
+    {% endform %}
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="error-messages-container">
+  {% if target.error_messages %}
+    {% for message in target.error_messages %}
+      <div class="alert alert-danger">
+        <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
