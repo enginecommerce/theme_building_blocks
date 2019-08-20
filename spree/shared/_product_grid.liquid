@@ -10,12 +10,10 @@
   {% unless products.last_page? %}
     <div class="row">
       <div class="col-12">
-        <a href="{{ next_page_url }}" class="next-page-link">
+        <a href="{% next_page_url %}" class="next-page-link">
           Next Page >
         </a>
       </div>
     </div>
   {% endunless %}
 </div>
-
-{% include 'spree/shared/enable_quicklook' %}

@@ -1,0 +1,33 @@
+<div class="hero-container content-header">
+  <div class="container featured-product">
+    <div class="backsplash"style="background-image:url('{{ post.main_image_large_url }}')"></div>
+    <div class="content">
+      <nav class="breadcrumb-link">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/blog/{{ post.category.path }}">{{ post.category.name }}</a>
+      </nav>
+      <hr>
+      <h2 class="post-title">{{ post.title }}</h2>
+      <p class="post-description">
+        {{ post.description }}
+      </p>
+      <hr>
+      <div class="post-meta d-flex align-items-center">
+        <div class="published-at">{{ post.published_at | date: "%a, %b %d, %Y" }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% assign blog_post_category = post.category.name | downcase %}
+
+<div class="container">
+  <div class="blog-show-container">
+    <div class="blog-show">
+      <div class="blog-content">
+        <div data-react-class="PostView" data-react-props="{{ post_view_props_json | html_escape }}"></div>
+      </div>
+    </div>
+  </div>
+</div>

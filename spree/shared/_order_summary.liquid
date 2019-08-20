@@ -1,0 +1,99 @@
+<div class="order-summary">
+  <div class="order-summary-header">
+    <div class="row">
+      <div class="col">
+        <h2>Summary</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {% for item in order.line_items %}
+        <div class="cart-single-item">
+          <div class="row">
+            <div class="col-4">
+              <div class="cart-item-value">
+                <div class="product-img">
+                  <img src="{{ item.large_image_url }}" alt="{{ item.name }}">
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="row">
+                <div class="col-8">
+                  <div class="cart-item-value">
+                    <div class="product-name">
+                      <a href="{{ item.product.path }}"><h3>{{ item.name }}</h3></a>
+                    </div>
+                  </div>
+                  <div class="cart-item-value">
+                    <div class="product-details">
+                    {% for option in item.variant.options_hash %}
+                      <div class="product-variant">
+                        <p class="option-type">{{ option[0] }}:</p>
+                        <p class="option-value">{{ option[1] }}</p>
+                      </div>
+                    {% endfor %}
+                    {% if item.variant.subscribable == true %}
+                      {% for subscription_item in item.subscription_line_items %}
+                        {% if subscription_item.interval_length == 1 %}
+                          <p>Every Month</p>
+                        {% elsif subscription_item.interval_length == 2 %}
+                          <p>Every Other Month</p>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="cart-item-value">
+                    <div class="product-quantity">
+                      <p>{{ item.quantity }}</p>
+                    </div>
+                  </div>
+                  <div class="cart-item-value">
+                    <div class="product-price">
+                      <p>{{ item.display_amount }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="col-12">
+      <div class="summary">
+        <div class="subtotal">
+          <p class="subtotal-label">Subtotal:</p>
+          <p class="subtotal-amount">{{ order.display_item_total }}</p>
+        </div>
+        {% assign adjustments = order.price_adjustments %}
+        {% for item in adjustments["promotions"] %}
+          <div class="promotion-applied">
+            <p class="promotion-label">{{ item["label"] }}:</p>
+            <p class="promotion-amount">{{ item["total"] }}</p>
+          </div>
+        {% endfor %}
+        {% for item in adjustments["shipments"] %}
+          <div class="shipments-applied">
+            <p class="shipments-label">{{ item["label"] }}:</p>
+            <p class="shipments-amount">{{ item["total"] }}</p>
+          </div>
+        {% endfor %}
+        {% for item in adjustments["taxes"] %}
+          <div class="taxes-applied">
+            <p class="taxes-label">{{ item["label"] }}:</p>
+            <p class="taxes-amount">{{ item["total"] }}</p>
+          </div>
+        {% endfor %}
+        <div class="total">
+          <h3 class="total-label">Total:</h3>
+          <h3 class="total-amount">{{ order.display_total }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

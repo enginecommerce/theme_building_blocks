@@ -1,0 +1,50 @@
+{% comment%} OpenGraph [facebook / apple] {% endcomment %}
+{% case controller_name %} 
+  {% when 'home' %}
+    <meta property="og:type" content="website"> 
+    <meta property="og:title" content="{% seo_title %}"> 
+    <meta property="og:description" content="{{ current_store.meta_description }}">
+  {% when 'posts' %}
+    {% if action_name == 'show' %}
+      <meta property="og:type" content="article"> 
+      <meta property="og:title" content="{{ post.title }}">
+      <meta property="og:description" content="{{ post.description }}"> 
+      <meta property="og:image" content="{{ post.main_image_large_url }}">
+      <meta property="og:image:secure_url" content="{{ post.main_image_large_url }}">
+    {% endif %}
+  {% when 'products' %}
+    {% if action_name == 'show' %}
+      <meta property="og:type" content="product">
+      <meta property="og:title" content="{{ product.name }}">
+      <meta property="og:description" content="{{ product.description }}">
+      <meta property="og:price:amount" content="{{ product.price }}">
+      <meta property="og:price:currency" content="USD"> 
+      {% comment %} ^^^ TODO i18n? {% endcomment %}
+      {% for image in product.variant_images limit: 3 %}
+        <meta property="og:image" content="{{ image.large_url }}">
+        <meta property="og:image:secure_url" content="{{ image.large_url }}">
+      {% endfor %}
+    {% endif %}
+  {% else %}
+{% endcase %}
+
+{% comment %} Twitter Cards {% endcomment %}
+{% case controller_name %}
+  {% when 'home' %}
+    <meta name="twitter:title" content="{% seo_title %}">
+    <meta name="twitter:description" content="{{ current_store.meta_description }}">
+  {% when 'posts' %}
+    {% if action_name == 'show' %}
+      <meta name="twitter:title" content="{{ post.title }}">
+      <meta name="twitter:description" content="{{ post.description }}">
+      <meta name="twitter:image" content="{{ post.main_image_large_url }}">
+    {% endif %}
+  {% when 'products' %}
+    {% if action_name == 'show' %}
+      <meta name="twitter:title" content="{{ product.name }}">
+      <meta name="twitter:description" content="{{ product.description }}">
+      {% if product.variant_images.first %}
+        <meta name="twitter:image" content="{{ product.variant_images.first.url }}">
+      {% endif %}
+    {% endif %}
+{% endcase %}

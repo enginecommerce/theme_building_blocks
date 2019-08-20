@@ -9,6 +9,8 @@
 
       {% include 'spree/shared/flash_messages' %}
 
+      {% include 'spree/shared/scripts' %}
+
       {% include 'spree/shared/header' %}
 
       {{ content_for_layout }}
@@ -16,6 +18,40 @@
       {% include 'spree/shared/footer' %}
 
       {% yield end_of_body %}
+      <script>
+        (function() {
+          //
+          // Load Engine Mail Modal and event management lib
+          var readyTime = Date.now();
+          var f = document.getElementsByTagName('script')[0];
+          var m = document.createElement('script');
+          m.src = '/packs/js/engine_commerce_lib.js';
+          m.onload = function () {
+            window._ec = new EngineCommerceLib({
+              eventHost: 'https://event-service.enginemail.io',
+              eventPath: '/dev/events/create',
+              readyTime: readyTime,
+              platformSchema: 'engine',
+              domain: '{{ current_store.url }}',
+              engine_public_api_key: '{{ current_store.public_api_key }}',
+            });
+          };
+          f.parentNode.insertBefore(m, f);
+        })();
+      </script>
+
+      <script>
+        (function() {
+          window.addEventListener('touchstart', function() {
+            try {
+              sessionStorage.setItem('engine-touch-enabled', 'true');
+            }
+            catch(err) {
+              console.error(err);
+            }
+          })
+        })();
+      </script>
 
       {% tracking_scripts_body_end %}
     </div>

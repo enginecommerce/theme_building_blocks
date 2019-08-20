@@ -9,7 +9,7 @@
           </div>
           <a class="btn btn-primary hero-button" href="{{ settings.text.welcome_button_link }}" role="button">
             <div class="btn-icon">
-              <img src="{{ settings.image.welcome_button_icon }}" alt="Cart Icon">
+              <img src="{{ settings.image.welcome_button_icon | asset_url }}" alt="Cart Icon">
             </div>
             {{ settings.text.welcome_message_button_text }}
           </a>
@@ -19,8 +19,12 @@
   </div>
   <div class="product-blocks-feature-container">
     <div class="container">
+    {% assign first_featured_product = settings.product.first_featured_product %}
+    {% assign second_featured_product = settings.product.second_featured_product %}
+    {% assign third_featured_product = settings.product.third_featured_product %}
+    {% capture id_list%}{{first_featured_product}},{{second_featured_product}},{{third_featured_product}}{%endcapture%} 
       <div class="row">
-        {% for product in products limit: 3 %}
+        {% for product in find_products[id_list] %}
           <div class="col-md-4">
             {% include 'spree/shared/product_block_feature' %}
           </div>
@@ -82,5 +86,3 @@
     </div>
   </div>
 </div>
-
-{% include 'spree/shared/enable_quicklook' %}
