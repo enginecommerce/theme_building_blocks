@@ -1,0 +1,225 @@
+.navbar {
+  padding: 0.5rem 0;
+}
+
+@media screen and (min-width: 576px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+}
+
+.cart-main {
+  margin: 75px 0;
+
+  .adjustments {
+    color: map-get($brand-orange, 'primary');
+  }
+
+  .item-count {
+    text-align: right;
+    font-size: 16px;
+  }
+
+  .empty-cart {
+    width: 100%;
+    text-align: center;
+    margin: 120px 0;
+    font-size: 30px;
+
+    .btn {
+      margin: 15px 0 0 0;
+    }
+  }
+
+  .cart-totals {
+    font-size: 30px;
+    width: 100%;
+    text-align: right;
+
+    .order-total {
+      font-size: 30px;
+    }
+  }
+
+  .cart-promo {
+    text-align: center;
+
+    .applied-promotion {
+      text-align: left;
+      color: map-get($brand-gray, 'primary');
+      margin: 30px 20px 15px 20px;
+    }
+
+    .btn-primary {
+      width: 80%;
+      margin-top: 15px;
+    }
+
+    .coupon-gift-card-code {
+      width: 100%;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 1200px) {
+      .coupon-gift-card-code {
+        font-size: inherit;
+      }
+    }
+
+    & > * {
+      margin: 5px 0;
+    }
+
+  }
+
+  .cart-totals {
+      padding: 20px 0;
+      border-top: 4px double map-get($brand-gray, 'darker');
+  }
+
+  .cart-items table {
+    width: 100%;
+  }
+
+  .cart-item {
+    align-items: center;
+    border-top: 1px solid map-get($brand-gray, 'darker');
+    width: 100%;
+
+    td {
+      padding: 20px 0;
+    }
+
+    & > * {
+      margin: 0 8px;
+    }
+
+    .product-name {
+      font-weight: bold;
+    }
+
+    .option-name {
+      color: map-get($brand-gray, 'darker');
+    }
+
+    .option-value {
+      color: map-get($brand-gray, 'darker');
+      font-weight: bold;
+    }
+
+    .thumbnail {
+      height: 55px;
+    }
+
+    .quantity {
+      width: 60px;
+      padding-left: 20px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .product-remove-button, .gift-card-edit-button {
+      color: map-get($brand-blue, 'primary');
+      cursor: pointer;
+    }
+  }
+}
+
+#cart-header {
+  color: {{ settings.color.cart_header_color }};
+  font-size: {{ settings.text.cart_header_text_size }};
+}
+
+.cart-actions {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-flow: wrap;
+  margin: 20px 0 30px;
+
+  .btn {
+    margin: 0 5px 15px;
+    flex-grow: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cart-actions {
+    justify-content: flex-end;
+
+    .btn {
+      padding-bottom: 32px;
+      margin-left: 12px;
+      flex-grow: 0;
+    }
+  }
+}
+
+#addToCartModal {
+  .add-to-cart-button-container {
+    display: flex;
+    flex-flow: wrap;
+
+    .btn {
+      flex-grow: 1;
+      margin: 5px;
+    }
+
+    .btn.checkout {
+      color: map-get($brand-white, 'primary');
+    }
+
+    .btn.view-cart {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+#gift-card-modal {
+  .gift-card-info {
+    width: 800px;
+
+    input {
+      width: 100%;
+      padding: 0 5px;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 25px;
+      border: 1px solid map-get($brand-gray, 'lighter');
+      padding: 10px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      height: 192px;
+    }
+  }
+
+  .errors {
+    color: map-get($brand-red, 'primary');
+    padding: 5px 0;
+    text-align: right;
+  }
+
+  .btn.update {
+    color: map-get($brand-white, 'primary');
+  }
+}
+
+.upsell-container{
+  background-color: #f4f4f4;
+  padding: 50px 0;
+  margin-bottom: 50px;
+}
+
+.upsell-price{
+  color: #333;
+  font-family: "Roboto-Light", sans-serif;
+  font-size: 18px;
+  text-align: center;
+}

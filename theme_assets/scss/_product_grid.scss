@@ -1,0 +1,130 @@
+.product-img img {
+  width: 100%;
+}
+
+.product-grid-page.content-feed-container {
+  background: map-get($brand-gray, 'lighter');
+  padding-top: 50px;
+}
+
+.product-single-container {
+  li {
+    list-style-position: inside;
+  }
+}
+
+.no-matches-text {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.next-page-link {
+  display: block;
+  font-family: $font-karla-bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ef4536;
+  text-align: right;
+  padding: 15px 0;
+}
+
+.product-column {
+  @extend .col;
+  flex: 0 0 calc(100% / {{ settings.text.product_column_count }});
+  max-width: calc(100% / {{ settings.text.product_column_count }});
+
+  // Despite the settings, when viewing page at small resolutions,
+  // we should have some sensible default widths.
+  @include media-breakpoint-down(lg) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  @include media-breakpoint-down(md) {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+#product-filter-container {
+  #filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+
+    #filter-menu-activate:hover {
+      cursor: pointer;
+    }
+
+    a {
+      color: #7D7D7D;
+    }
+  }
+
+  #filter-menu {
+    display: none;
+
+    @media (min-width: 992px) {
+        display: block;
+    }
+  }
+
+  h5 {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #C1C1C1;
+
+    :first-child {
+      margin-top: 0.5rem;
+    }
+  }
+
+  h4 {
+    margin-bottom: 0px;
+  }
+
+  .form-check {
+    margin-bottom: 7px;
+
+    .form-check-input {
+      position: relative;
+      margin: 0;
+    }
+
+    .form-check-label {
+      margin-left: 5px;
+    }
+
+    input, input.form-control {
+      height: auto;
+      line-height: inherit;
+    }
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+.ui-widget-header {
+  background-color: map-get($brand-blue, 'primary') !important;
+}
+
+#slider-range {
+  .ui-slider-handle {
+    border-radius: 50%;
+  }
+}
+
+#filter-submit {
+  letter-spacing: 0.8px;
+}
+
+#product-count {
+  color: #7D7D7D;
+}
+
+#price-range-amount {
+  text-align: center;
+}
