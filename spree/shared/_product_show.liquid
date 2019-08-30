@@ -1,13 +1,21 @@
 {% csrf_token %}
 <div class="container product-show">
+  <div class="row product-details d-flex d-lg-none">
+    <h1 class="product-name" id="product-show-product-name">{{ product.name }}</h1>
+  </div>
   <div class="row">
     <div class="col-lg-6 product-images {{ settings.text.product_show_image_position }} {{ settings.text.carousel_position }}">
       {% include 'spree/shared/product_image_carousel' %}
     </div>
     <div class="col details-and-cart">
       <div class="row product-details">
-        <h1 class="product-name" id="product-show-product-name">{{ product.name }}</h1>
-        <div class="product-price col-12" id="product-show-product-price">{{ product.price }}</div>
+        <h1 class="product-name d-none d-lg-flex" id="product-show-product-name">{{ product.name }}</h1>
+        <div class="col-12 product-price-container">
+          <span id="product-show-product-price" class="product-price">{{ product.price }}</span>
+          {% unless product.compare_at_price == "$0.00" %}
+            <span class="product-compare-at-price">{{ product.compare_at_price }}</span>
+          {% endunless %}
+        </div>
         <div class="product-description col-12" id="product-show-product-description">{{ product.description }}</div>
       </div>
       <div class="row add-to-cart" id="product-show-add-to-cart-button">
@@ -78,33 +86,34 @@ document.body.addEventListener("product:variant:unavailable", function (event) {
 
 <script id="carousel">
 (function(){
-  var currentScrollFunction;
+  var touchCapable = (sessionStorage.getItem('engine-touch-enabled') === 'true');
+  var scrollLeft = function(event) {
+    var id = event.currentTarget.getAttribute("data-target");
+    var scrollTarget = document.getElementById(id);
+    var width = scrollTarget.clientWidth;
+    scrollTarget.scrollLeft -= width;
+  };
 
-  let nudge = function(increment, target) {
-    return function() {
-      target.scrollLeft += increment
-    }
+  var scrollRight = function(event) {
+    var id = event.currentTarget.getAttribute("data-target");
+    var scrollTarget = document.getElementById(id);
+    var width = scrollTarget.clientWidth;
+    scrollTarget.scrollLeft += width;
+  };
+
+  var scrollForward = document.querySelector('.scroll-forward');
+  var scrollBack = document.querySelector('.scroll-back');
+
+  var container = document.getElementById(scrollForward.getAttribute("data-target"));
+
+  scrollForward.addEventListener('mousedown', scrollRight);
+  scrollForward.addEventListener('touchstart', scrollRight);
+
+  scrollBack.addEventListener('mousedown', scrollLeft);
+  scrollBack.addEventListener('touchstart', scrollLeft);
+
+  if (touchCapable) {
+    container.style.overflow = 'scroll';
   }
-
-  let scrollLeft = function(event){
-    let scrollTarget = document.getElementById(event.currentTarget.getAttribute("data-target"))
-    currentScrollFunction = setInterval(nudge(-8, scrollTarget), 30)
-  }
-
-  let scrollRight = function(event){
-    let scrollTarget = document.getElementById(event.currentTarget.getAttribute("data-target"))
-    currentScrollFunction = setInterval(nudge(8, scrollTarget), 30)
-  }
-
-  let stopScrolling = function() {
-    clearInterval(currentScrollFunction)
-  }
-
-  $(".scroll-forward").mousedown(scrollRight)
-  $(".scroll-forward").mouseup(stopScrolling)
-  $(".scroll-forward").mouseout(stopScrolling)
-  $(".scroll-back").mousedown(scrollLeft)
-  $(".scroll-back").mouseup(stopScrolling)
-  $(".scroll-back").mouseout(stopScrolling)
 })()
 </script>

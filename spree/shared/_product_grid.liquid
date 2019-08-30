@@ -1,21 +1,155 @@
 <div class="container">
   <div class="row">
-    {% for product in products %}
-      {% if product.is_sellable? %}
-        {% assign partial_product = product %}
-        {% include 'spree/shared/product' with partial_product %}
-      {% endif %}
-    {% endfor %}
-  </div>
-  {% unless products.last_page? %}
-    <div class="row">
-      <div class="col-12">
-        <a href="{{ next_page_url }}" class="next-page-link">
-          Next Page >
-        </a>
+    <div class="col-12 col-lg-3">
+      <div class="row">
+        <div id="product-filter-container" class="col-12 pb-4">
+          <div id="filter-header">
+            <h4 class="text-uppercase d-inline" id="filter-menu-activate">Filters <i class="fas fa-caret-down"></i></h4>
+            <a class="d-inline" href='/products'>Reset</a>
+          </div>
+          <form id="filter-menu" class="my-2 my-lg-0" action="/products" method="GET">
+            {% assign sorted_taxons = taxons | sort: "pretty_name" %}
+            {% for taxon in sorted_taxons %}
+            {% assign nested_depth = taxon.ancestors | size %}
+            {% assign sub_taxon_depth = taxon.children | size %}
+            {% assign parameterized_name = taxon.pretty_name | replace: " -> ", "-" | replace: " ", "-" %}
+            {% comment %} Top level taxon filter {% endcomment %}
+            {% if nested_depth == 0 and sub_taxon_depth > 1 %}
+              <h5>{{ taxon.name }}</h5>
+            {% comment %} Sub-taxon {% endcomment %}
+            {% elsif nested_depth != 0 %}
+              <div class="form-check">
+                {% for i in (2..nested_depth) %}
+                  <span class="ml-3"></span>
+                {% endfor %}
+                  <input
+                    class="form-check-input"
+                    value="{{ taxon.id }}"
+                    name="search[in_taxon_ids][]"
+                    type="checkbox"
+                    id="checkbox-{{parameterized_name}}"
+                  >
+                  <label for="checkbox-{{parameterized_name}}" class="form-check-label">{{ taxon.name }}</label>
+                </div>
+              {% endif %}
+            {% endfor %}
+            <p>
+              <h5 for="price-range-amount">Price Range</h5>
+              <input type="text" class="price-range-amount" id="price-range-amount">
+            </p>
+            <div id="slider-range"></div>
+            <input name="search[price_between][]" type="hidden" id="min-price" value="{{ settings.behavior.filter_min_price }}">
+            <input name="search[price_between][]" type="hidden" id="max-price" value="{{ settings.behavior.filter_max_price }}">
+            <button id="filter-submit" class="search-submit-button btn btn-primary mt-4" type="submit">FILTER</button>
+          </form>
+        </div>
       </div>
     </div>
-  {% endunless %}
+    <div class="col-12 col-lg-9">
+      <h2 class="mb-4"><span id="filtered-products">ALL PRODUCTS</span> <span id="product-count">({{ products | size }})</span></h2>
+      <div class="row">
+      {% if products.size > 0 %}
+        {% for product in products %}
+          {% if product.is_sellable? %}
+            {% assign partial_product = product %}
+            {% include 'spree/shared/product' with partial_product %}
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <p class="ml-5 no-matches-text">Sorry, there are no products that match your search criteria.</p>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+  {% comment %} TODO: Add working next and previous buttons {% endcomment %}
+  {% if products.size != 0 %}
+    {% unless products.last_page? %}
+      <div class="row">
+        <div class="col-12">
+          <a href="{% next_page_url %}" class="next-page-link">
+            Next Page >
+          </a>
+        </div>
+      </div>
+    {% endunless %}
+  {% endif %}
 </div>
 
-{% include 'spree/shared/enable_quicklook' %}
+<script>
+  // Filter menu dropdown toggle
+  $( "#filter-menu-activate" ).click(function() {
+    $( "#filter-menu" ).slideToggle( "slow", function() {
+      // Animation complete.
+    });
+  });
+   let checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {}
+  let $checkboxes = $("#product-filter-container :checkbox");
+  const searchParams = new URLSearchParams(window.location.search)
+  // Remove all checkboxes from local storage if there are no queries on page
+  // load.
+  if (searchParams.toString().length == 0) {
+    localStorage.removeItem("checkboxValues");
+    localStorage.removeItem("min-price");
+    localStorage.removeItem("max-price");
+   } else {
+    $('#filtered-products').text('RESULTS')
+    $.each(checkboxValues, function(key, value) {
+      $("#" + key).prop('checked', value);
+    });
+  }
+   // This stores the checked checkboxes in local storage for persistance
+  // between page loads.
+  $checkboxes.on("change", function(){
+    $checkboxes.each(function(){
+      checkboxValues[this.id] = this.checked;
+    });
+     localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+  });
+   // Sets the locally stored min and max price if they exist
+  $( document ).ready(function() {
+    if (localStorage.getItem("min-price") !== null) {
+      $("#min-price").val(localStorage.getItem("min-price"));
+    }
+    if (localStorage.getItem("max-price") !== null) {
+      $("#max-price").val(localStorage.getItem("max-price"));
+    }
+  });
+   $( function() {
+    // Sets the beginning min/max price values if stored locally
+    function startingMinPrice() {
+      if (localStorage.getItem("min-price") !== null) {
+        return localStorage.getItem("min-price");
+      } else {
+        return {{ settings.behavior.filter_min_price }}
+      }
+    }
+    function startingMaxPrice() {
+      if (localStorage.getItem("max-price") !== null) {
+        return localStorage.getItem("max-price");
+      } else {
+        return {{ settings.behavior.filter_max_price }}
+      }
+    }
+    // jQuery UI's slider range library
+    $( "#slider-range" ).slider({
+      range: true,
+      min: {{ settings.behavior.filter_min_price }},
+      max: {{ settings.behavior.filter_max_price }},
+      values: [ startingMinPrice(), startingMaxPrice()  ],
+      slide: function( event, ui ) {
+        $( "#price-range-amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        $( "#min-price" ).val(ui.values[ 0 ]);
+        $( "#max-price" ).val(ui.values[ 1 ]);
+      }
+    });
+    $( "#price-range-amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+  } );
+   // Saves the min/max price values when filtered
+  let minPriceId = $("#min-price").attr("id");
+  let maxPriceId = $("#max-price").attr("id");
+  $( "#filter-submit" ).on('click', function() {
+    localStorage.setItem( minPriceId, $("#min-price").val() );
+    localStorage.setItem( maxPriceId, $("#max-price").val() );
+  } );
+</script>

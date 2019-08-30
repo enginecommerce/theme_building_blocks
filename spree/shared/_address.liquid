@@ -1,0 +1,39 @@
+<div class="address vcard">
+  <div class="fn">
+    <p>{{ address.full_name }}</p>
+  </div>
+  {% if address.company %}
+    <div class="org">
+      <p>{{ address.company }}</p>
+    </div>
+  {% endif %}
+  <div class="adr">
+    <div class="street-address">
+      <div class="street-address-line">
+        <p>{{ address.address1 }}</p>
+      </div>
+      {% if address.address2 %}
+        <div class="street-address-line">
+          <p>{{ address.address2 }}</p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="local">
+      <span class="locality">{{ address.city }}</span>,
+      <span class="region">{{ address.state_text }}</span>
+      <span class="postal-code">{{ address.zipcode }}</span>
+      <p class="country-name">{{ address.country.name }}</p>
+    </div>
+  </div>
+  {% if address.phone %}
+    <div class="tel">
+      <p><b>Phone</b> {{ address.phone }}</p>
+    </div>
+  {% endif %}
+  {% if address.alternative_phone %}
+    <div class="alternative-phone tel">
+      <span class="type"><b>Phone (alternate)</b></span>
+      <p>{{ address.alternative_phone }}</p>
+    </div>
+  {% endif %}
+</div>

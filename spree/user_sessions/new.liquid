@@ -1,0 +1,35 @@
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="breadcrumb-link">
+          <a href="/">Home</a>
+          <span>Login / Register</span>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div class="simple-form">
+    <h2>
+      Welcome Back
+    </h2>
+      <p>Log back in to your account to change your information or see recent purchases.</p>
+      {% form login %}
+        <div class="row">
+            <input required="required" class="form-control" id="spree_user_email" type="email" name="spree_user[email]" value="{{ spree_user.email }}" placeholder="Enter Your Email">
+
+            <input required="required" class="form-control" id="spree_user_password" type="password" name="spree_user[password]" placeholder="Enter Your Password">
+
+        </div>
+        <div class="row login-button-container">
+          <input type="submit" class="btn btn-primary" value="Log In To Your Account">
+          <p>or</p>
+          <a class="btn btn-secondary" href="/signup">Register a New Account</a>
+          <p><br><a href="/password/recover">Forgot your password?</a></p>
+        </div>
+      {% endform %}
+  </div>
+</div>

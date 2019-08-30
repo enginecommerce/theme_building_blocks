@@ -25,9 +25,9 @@
       <div class="col-md-5 col-lg-4 cart-coupon {{ settings.text.cart_promo_position }}">
         {% if current_order and order.price_adjustments["promotions"] == blank %}
           <div class="sidebar-pill cart-promo">
-            <h4>Have a Promo Code?</h4>
-            <input id="coupon-code" class="coupon-code" name="order[coupon_code]" title="Coupon Code" value="" placeholder="Promo Code" type="text">
-            <input class="btn btn-primary btn-primary-gray" name="coupon_code" value="Apply" type="submit">
+            <h4>Have a Coupon or Gift Card Code?</h4>
+            <input id="coupon-gift-card-code" class="coupon-code coupon-gift-card-code" name="order[coupon_code_or_gift_card_code]" title="Coupon or Gift Card Code" value="" placeholder="Coupon or Gift Card Code" type="text">
+            <input id="coupon-gift-card-code-submit" class="btn btn-primary btn-primary-gray" value="Apply" type="submit">
           </div>
         {% endif %}
         {% if current_order and order.price_adjustments["promotions"] != blank %}
@@ -52,7 +52,7 @@
                   <img class="thumbnail" src="{{ item.thumbnail_url }}" alt="{{ item.name }}">
                 </td>
                 <td class="name-and-details">
-                  <a class="product-name" href="{{ item.product.path }}">
+                  <a class="product-name" href="{{ item.product.path }}" data-id="{{ item.id }}">
                     {{ item.name }}
                   </a>
                   <div class="product-details">
@@ -67,6 +67,12 @@
                     <a class="product-remove-button" data-id="{{ item.id }}" alt="Remove {{ item.name }}">
                       Remove
                     </a>
+                    <br/>
+                    {% if item.is_gift_card? %}
+                      <a class="gift-card-edit-button" data-id="{{ item.gift_card.id }}" alt="Update {{ item.name }}">
+                        Edit Gift Card Information
+                      </a>
+                    {% endif %}
                   </div>
                 </td>
                 <td class="product-quantity">
@@ -107,22 +113,65 @@
             <a href="/products" class="btn btn-primary" style="display: inline-block;">Keep Shopping &gt;</a>
           <p>
         {% endif %}
+      
       </div>
     </div>
   {% endform %}
 </div>
+{% if current_order.line_items.first.product.related_products %}
+  <div class="upsell-wrap">
+    <div class="container">
+      <h1 class="cart-header">Related Items</h1>
+    </div>
+    <div class="upsell-container">
+      <div class="product-blocks-feature-container">
+        <div class="container">
+          <div class="row">
+            {% for product in current_order.line_items.first.product.related_products limit: 3 %}
+              <div class="col-md-4">
+                  {% include 'spree/shared/upsell_block_feature' %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
 <script>
   // Remove item from cart
   // find the corresponding quantity field, set its value to 0, and submit the form
   const delete_buttons = document.querySelectorAll(".product-remove-button")
   delete_buttons.forEach(button => {
     button.addEventListener("click", function(e) {
-      const id = this.getAttribute("data-id")
-      const quantity_selector = `input.quantity[data-id="${ id }"]`
-      const quantity = document.querySelector(quantity_selector)
-      const form = document.querySelector("form#update-cart")
-      quantity.value = 0
-      form.submit()
+      const id = this.getAttribute("data-id");
+      const quantity_selector = `input.quantity[data-id="${ id }"]`;
+      const quantity = document.querySelector(quantity_selector);
+      const form = document.querySelector("form#update-cart");
+      quantity.value = 0;
+      form.submit();
     })
   })
+
+  const gift_cards_buttons = document.querySelectorAll(".gift-card-edit-button")
+  gift_cards_buttons.forEach(button => {
+    button.addEventListener("click", function(e) {
+      const id = this.getAttribute("data-id");
+      let modal = $("#gift-card-modal");
+      modal.data("giftCardId", id);
+
+      $.ajax({
+        url: `/api/gift_cards/${id}`,
+        method: "GET",
+        success: function(response) {
+          modal.data("giftCard", response);
+        },
+        error: function(error) {
+          console.error("Couldn't find a gift card with that ID");
+        }
+      });
+
+      modal.modal();
+    })
+  });
 </script>

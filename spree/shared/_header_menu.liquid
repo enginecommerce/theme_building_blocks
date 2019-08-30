@@ -1,5 +1,11 @@
 {% assign header_items = header_menu.menu_items | sort: "sort" %}
 <ul class="navbar-nav">
+  <li class="d-lg-none">
+    <a class="dropdown-item" href="/account">
+      <i class="fas fa-user"></i>
+      Account
+    </a>
+  </li>
   {% for header_item in header_items %} {% assign header_item_children_count = header_item.sub_menu_items | size %}
     {% if header_item_children_count > 0 %}
       {% comment %} menu item has children - render submenu {% endcomment %}

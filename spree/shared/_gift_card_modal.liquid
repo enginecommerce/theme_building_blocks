@@ -1,0 +1,96 @@
+<div class="modal fade" id="gift-card-modal" tabindex="-1" role="dialog" aria-labelledby="Gift Card Modal" aria-hidden="true">
+<div class="modal-dialog modal-dialog-right" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Gift Card</h3>
+    </div>
+    <div class="modal-body">
+      <div class="container gift-card-info">
+        <div class="row update-gift-card" id="gift-card-update-button">
+          <form class="update-gift-card-form" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="&#x2713;" />
+            <input type="hidden" name="_method" value="patch" />
+            {% csrf_token %}
+
+            <div class="gift-card-info">
+              <div class="row">
+                <div class="col-4">
+                  <div data-hook="recipient_name" class="field">
+                    <label for="gift_card_recipient_name">Recipient Name</label>
+                    <input class="fullwidth" type="text" name="gift_card[recipient_name]" id="gift_card_recipient_name" />
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div data-hook="recipient_email" class="field">
+                    <label for="gift_card_recipient_email">Recipient Email</label>
+                    <input class="fullwidth" type="text" name="gift_card[recipient_email]" id="gift_card_recipient_email"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div data-hook="puchaser_name" class="field">
+                    <label for="gift_card_purchaser_name">Purchaser Name</label>
+                    <input class="fullwidth" type="text" name="gift_card[purchaser_name]" id="gift_card_purchaser_name" />
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div data-hook="gift_message" class="field">
+                    <label for="gift_card_gift_message">Gift Message</label>
+                    <textarea class="fullwidth" name="gift_card[gift_message]" id="gift_card_gift_message" rows="10"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 errors"></div>
+            <div class="cart-actions btn">
+              <button id="update-gift-cart-button" class="btn btn-primary btn-primary-gray btn-update">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    $("#gift-card-modal").on("shown.bs.modal", function (e) {
+      const giftCard = $("#gift-card-modal.show").data("giftCard");
+
+      if (giftCard) {
+        document.getElementById("gift_card_recipient_name").value = giftCard.recipient_name;
+        document.getElementById("gift_card_recipient_email").value = giftCard.recipient_email;
+        document.getElementById("gift_card_purchaser_name").value = giftCard.purchaser_name;
+        document.getElementById("gift_card_gift_message").value = giftCard.gift_message;
+      }
+    });
+
+    $("#update-gift-cart-button").on("click", function(event) {
+      event.preventDefault();
+      let form = $("form.update-gift-card-form");
+      let userToken = $("#gift-card-modal.show").data("userToken");
+      let giftCardId = $("#gift-card-modal.show").data("giftCardId");
+      let orderGuestToken = $("#gift-card-modal.show").data("orderGuestToken");
+      let recipientName = document.getElementById("gift_card_recipient_name").value;
+      let recipientEmail = document.getElementById("gift_card_recipient_email").value;
+      let purchaserName = document.getElementById("gift_card_purchaser_name").value;
+      let giftMessage = document.getElementById("gift_card_gift_message").value;
+
+      $.ajax({
+        url: `/api/gift_cards/${giftCardId}`,
+        method: "PUT",
+        data: form.serialize(),
+        success: function(response) {
+          $("#gift-card-modal").modal("hide");
+        },
+        error: function(error) {
+          $(".errors").text("Coulnd't update the gift card, please try again.");
+          console.error("Coulnd't update the gift card, please try again.")
+        }
+      });
+    });
+  })
+</script>

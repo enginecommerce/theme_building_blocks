@@ -10,9 +10,15 @@
 <meta name="description" content="{{ current_store.meta_description }}">
 <meta name="keywords" content="{{ current_store.meta_keywords }}">
 
-{{ meta_data_tags }}
+{% if json_ld %}
+  <script type="application/ld+json">
+    {{ json_ld }}
+  </script>
+{% endif %}
 
 {% canonical_url_tags %}
+
+{% include 'spree/shared/opengraph' %}
 
 {{ csrf_meta_tags }}
 
@@ -29,6 +35,8 @@ $(function () {
 
 {% javascript_pack_tag 'fe' %}
 {% stylesheet_pack_tag 'fe' %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 {{ content_for_head }}
 
