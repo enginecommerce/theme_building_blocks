@@ -1,3 +1,7 @@
+{% content_for head_scripts %}
+  {% javascript_pack_tag 'storefront_product' %}
+{% endcontent_for %}
+
 {% csrf_token %}
 <div class="container product-show">
   <div class="row product-details d-flex d-lg-none">
@@ -10,16 +14,25 @@
     <div class="col details-and-cart">
       <div class="row product-details">
         <h1 class="product-name d-none d-lg-flex" id="product-show-product-name">{{ product.name }}</h1>
-        <div class="product-price col-12" id="product-show-product-price">{{ product.price }}</div>
+        <div class="col-12 product-price-container">
+          <span id="product-show-product-price" class="product-price">{{ product.price }}</span>
+          {% unless product.compare_at_price == "$0.00" %}
+            <span class="product-compare-at-price">{{ product.compare_at_price }}</span>
+          {% endunless %}
+        </div>
         <div class="product-description col-12" id="product-show-product-description">{{ product.description }}</div>
       </div>
       <div class="row add-to-cart" id="product-show-add-to-cart-button">
         <div class="col" data-react-class="AddToCartForm" data-react-props="{{ product_json_full | html_escape }}"></div>
         <div class="col errors"></div>
       </div>
-
     </div>
   </div>
+  {% if product.video_url.size > 0 %}
+    <div class="video-container col-lg-6">
+      <iframe src="{{ product.video_url }}" allowfullscreen></iframe>
+    </div>
+  {% endif %}
 </div>
 
 <script id="event-bindings">

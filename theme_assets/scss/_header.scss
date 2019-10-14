@@ -1,0 +1,100 @@
+.main-header {
+  padding-top: 15px;
+  .navbar {
+    flex-wrap: nowrap;
+  }
+}
+
+nav {
+
+  img {
+    max-width: 100%;
+  }
+
+  .navbar-toggler {
+    border: 0;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .navbar-brand {
+    margin-right: auto;
+
+    img {
+      max-width: 200px;
+    }
+  }
+
+  .cart {
+    padding: 0.25rem 0.75rem;
+
+    .cart-number {
+      align-items: center;
+      background-color: #0077ed;
+      border-radius: 30px;
+      color: #fff;
+      display: flex;
+      font-weight: 700;
+      height: 18px;
+      justify-content: center;
+      position: absolute;
+      width: 18px;
+      top: 10px;
+      right: 2px;
+      font-size: 10px;
+
+      &:empty {
+        display: none;
+      }
+
+      @media screen and (min-width: 576px) {
+        right: 15px;
+      }
+
+      @media screen and (min-width: 992px) {
+        top: 25px;
+      }
+    }
+  }
+
+  .navbar-collapse {
+    // Hiding overflow because of the search bar button's negative left value
+    overflow-x: hidden;
+
+    @media screen and (min-width: 992px) {
+      overflow-x: initial;
+    }
+  }
+
+  .dropdown-item {
+    padding: .75rem 1.5rem;
+  }
+
+  #header-search {
+    margin: .75rem 1.5rem;
+    width: 100%;
+
+    @media screen and (min-width: 1200px) {
+      width: 300px;
+    }
+
+    .search-field {
+      width: 100%;
+      padding-left: 15px;
+
+      @media screen and (min-width: 576px) {
+        max-width: 250px;
+      }
+    }
+
+    .btn {
+      left: -68px;
+    }
+  }
+
+  .account-link {
+    padding: 0.25rem 0.75rem;
+  }
+}

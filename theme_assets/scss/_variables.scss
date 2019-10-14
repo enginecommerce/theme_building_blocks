@@ -1,0 +1,78 @@
+// Fonts
+// Font Imports
+// Roboto
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../fonts/Roboto-Regular.ttf');
+}
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../fonts/Roboto-Bold.ttf');
+}
+@font-face {
+  font-family: 'Roboto-Light';
+  src: url('../fonts/Roboto-Light.ttf');
+}
+@font-face {
+  font-family: 'Roboto-Italic';
+  src: url('../fonts/Roboto-Italic.ttf');
+}
+// Karla
+@font-face {
+  font-family: 'Karla-Regular';
+  src: url('../fonts/Karla-Regular.ttf');
+}
+@font-face {
+  font-family: 'Karla-Bold';
+  src: url('../fonts/Karla-Bold.ttf');
+}
+// Font Variables
+// Roboto
+$font-roboto: 'Roboto-Regular', sans-serif;
+$font-roboto-bold: 'Roboto-Bold', sans-serif;
+$font-roboto-light: 'Roboto-Light', sans-serif;
+$font-roboto-italic: 'Roboto-Italic', sans-serif;
+//Karla
+$font-karla: 'Karla-Regular', sans-serif;
+$font-karla-bold: 'Karla-Bold', sans-serif;
+
+// Colors
+// Color Variables
+
+$brand-black: (
+  primary: #000
+);
+
+$brand-blue: (
+  primary: #0077ed,
+  dark: #0f60b1
+);
+
+$brand-gray: (
+  lighter: #f4f4f4,
+  primary: #e3e3e3,
+  dark: #bababa,
+  darker: #515356,
+  darkest: #333
+);
+
+$brand-red: (
+  primary: #fd6a51
+);
+
+$brand-white: (
+  primary: #fff
+);
+
+$brand-orange: (
+  primary: #ef4536
+);
+
+$brand-clear: (
+  primary: rgba(0, 0, 0, 0)
+);
+
+$brand-tan: (
+  primary: #f2f2f2,
+  darker: #d1d1d1
+);

@@ -22,11 +22,11 @@
     {% assign first_featured_product = settings.product.first_featured_product %}
     {% assign second_featured_product = settings.product.second_featured_product %}
     {% assign third_featured_product = settings.product.third_featured_product %}
-    {% capture id_list%}{{first_featured_product}},{{second_featured_product}},{{third_featured_product}}{%endcapture%} 
+    {% capture id_list%}{{first_featured_product}},{{second_featured_product}},{{third_featured_product}}{%endcapture%}
       <div class="row">
         {% for product in find_products[id_list] %}
           <div class="col-md-4">
-            {% include 'spree/shared/product_block_feature' %}
+            {% include 'spree/shared/product_block_feature', show_price: false %}
           </div>
         {% endfor %}
       </div>

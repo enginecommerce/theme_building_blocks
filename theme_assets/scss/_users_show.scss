@@ -1,0 +1,99 @@
+.user-account {
+  padding: 20px 0 50px;
+
+  @media screen and (min-width: 992px) {
+    padding: 10px 0 100px;
+  }
+
+  .user-account-title {
+    padding: 25px 0;
+    text-align: center;
+
+    @media screen and (min-width: 992px) {
+      padding: 50px 0;
+    }
+  }
+
+  .user-account-info {
+    padding: 25px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      flex-grow: 1;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    @media screen and (min-width: 576px) {
+      .btn {
+        width: auto;
+        margin: 5px;
+      }
+    }
+  }
+
+  .user-account-orders {
+    padding: 25px 0;
+    text-align: center;
+
+    @media screen and (min-width: 992px) {
+      padding: 50px 0;
+    }
+
+    .order {
+      padding: 30px 0;
+      text-align: left;
+      border-top: 1px solid map-get($brand-gray, 'darker');
+
+      @media screen and (min-width: 768px) {
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      .order-item {
+        padding: 10px 0;
+      }
+
+      .order-number a {
+        color: map-get($brand-gray, 'dark');
+        font-family: $font-roboto-light;
+        font-size: 22px;
+        line-height: 30px;
+        font-weight: 300;
+        text-transform: none;
+        letter-spacing: normal;
+      }
+
+      .order-placed {
+        color: map-get($brand-black, 'primary');
+        font-family: $font-karla-bold;
+        font-size: 16px;
+        letter-spacing: 2px;
+        line-height: 24px;
+        text-transform: uppercase;
+      }
+
+      .actions a {
+        color: map-get($brand-gray, 'darkest');
+        font-weight: 500;
+        text-decoration: underline;
+      }
+
+    }
+
+    .btn-quaternary {
+      padding: 2px 10px;
+    }
+
+    .no-orders {
+      padding: 10px 0;
+    }
+  }
+}
