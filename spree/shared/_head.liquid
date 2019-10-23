@@ -7,8 +7,8 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no, user-scalable=no">
 
-<meta name="description" content="{{ current_store.meta_description }}">
-<meta name="keywords" content="{{ current_store.meta_keywords }}">
+<meta name="description" content="{% meta_description %}">
+<meta name="keywords" content="{% meta_keywords %}">
 
 {% if json_ld %}
   <script type="application/ld+json">
@@ -33,9 +33,10 @@ $(function () {
 })
 </script>
 
-{% javascript_pack_tag 'fe' %}
-{% stylesheet_pack_tag 'fe' %}
+{% javascript_pack_tag 'storefront' %}
 
-{{ content_for_head }}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+{% yield head_scripts %}
 
 {% tracking_scripts_head %}

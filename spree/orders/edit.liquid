@@ -1,3 +1,7 @@
+{% content_for head_scripts %}
+  {% javascript_pack_tag 'storefront_cart' %}
+{% endcontent_for %}
+
 <div class="content-header">
   <div class="container">
     <div class="row">
@@ -86,17 +90,45 @@
             {% endfor %}
           </table>
           <div class="cart-totals">
-            <div class="adjustments">
-              {% assign adjustments = order.price_adjustments %}
-              {% for item in adjustments["promotions"] %}
-                <div class="remove-promotion" data-react-class="RemovePromotion" data-react-props="{{ item['removalJson'] | html_escape }}"></div>
-                <span class="promotion-label">{{ item["label"] }}:</span>
-                <span class="promotion-amount">{{ item["total"] }}</span>
-              {% endfor %}
-            </div>
             <div class="subtotal">
               <span class="subtotal-label">
                 Subtotal:
+              </span>
+              <span class="subtotal">
+                {{ order.display_item_total }}
+              </span>
+            </div>
+            {% if order.display_ship_total != "$0.00" %}
+              <div class="shipping-total">
+                <span class="shipping-label">
+                  Shipping:
+                </span>
+                <span class="shipping-total">
+                  {{ order.display_ship_total }}
+                </span>
+              </div>
+            {% endif %}
+            {% if order.display_tax_total != "$0.00" %}
+              <div class="tax-total">
+                <span class="tax-label">
+                  Tax:
+                </span>
+                  <span class="tax-total">
+                    {{ order.display_tax_total }}
+                  </span>
+              </div>
+            {% endif %}
+            <div class="adjustments">
+              {% assign adjustments = order.price_adjustments %}
+              {% for item in adjustments["promotions"] %}
+                <span class="promotion-label">{{ item["label"] }}:</span>
+                <span class="promotion-amount">{{ item["total"] }}</span>
+                <div class="remove-promotion" data-react-class="RemovePromotion" data-react-props="{{ item['removalJson'] | html_escape }}"></div>
+              {% endfor %}
+            </div>
+            <div class="order-total">
+              <span class="order-total-label">
+                Total:
               </span>
               <span class="order-total">
                 ${{ order.display_order_total }}
@@ -113,7 +145,6 @@
             <a href="/products" class="btn btn-primary" style="display: inline-block;">Keep Shopping &gt;</a>
           <p>
         {% endif %}
-      
       </div>
     </div>
   {% endform %}
@@ -129,7 +160,7 @@
           <div class="row">
             {% for product in current_order.line_items.first.product.related_products limit: 3 %}
               <div class="col-md-4">
-                  {% include 'spree/shared/upsell_block_feature' %}
+                {% include 'spree/shared/product_block_feature', show_price: true %}
               </div>
             {% endfor %}
           </div>

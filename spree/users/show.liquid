@@ -1,3 +1,7 @@
+{% content_for head_scripts %}
+  {% javascript_pack_tag 'storefront_account' %}
+{% endcontent_for %}
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ current_store.google_maps_api_key }}&libraries=places"></script>
 {% csrf_token %}
 <div class="content-header">
@@ -23,7 +27,7 @@
     <div class="user-account-title">
       <div class="row">
         <div class="col-12">
-          <h2>Welcome Back, {{ user.login }}!</h2>
+          <h2>Welcome Back!</h2>
         </div>
         <div class="col-12">
           <h4>Store Credits: {{ user.store_credits_total }}</h4>
@@ -34,7 +38,9 @@
       <div class="row">
         <div class="col-12">
           <a class="btn btn-primary" href="/account/edit">Edit email/password</a>
-          <a class="btn btn-secondary" href="/logout" role="button">Log Out</a>
+          {% form logout %}
+            <button class="btn btn-secondary" type="submit">Log Out</button>
+          {% endform %}
         </div>
       </div>
     </div>

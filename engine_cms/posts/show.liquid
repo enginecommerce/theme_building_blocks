@@ -1,3 +1,6 @@
+{% javascript_pack_tag 'storefront_cms' %}
+{% stylesheet_pack_tag 'storefront_cms' %}
+
 {% case post.type %}
   {% when 'custom_page' %}
     {% include 'engine_cms/posts/show_custom_page_post', post: post %}

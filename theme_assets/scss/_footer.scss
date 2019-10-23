@@ -1,0 +1,50 @@
+footer {
+
+  background-color: map-get($brand-gray, 'lighter');
+  padding-top: 35px;
+
+  .social > a {
+    padding: 0 12px;
+    color: map-get($brand-gray, 'dark');
+    font-size: x-large;
+  }
+  
+  .copyright-notice {
+    color: map-get($brand-gray, 'dark');
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .footer-menu-section a {
+    display: block;
+    font-size: 18px;
+    color: map-get($brand-blue, 'primary');
+    letter-spacing: 1px;
+  }
+
+  .title {
+    color: map-get($brand-gray, 'darker');
+  }
+
+  .subscription {
+    text-align: center;
+
+    input[type="email"] {
+      width: 80%;
+      font-size: 12px;
+      padding-left: 15px;
+    }
+
+    .btn {
+      left: -68px;
+    }
+
+  }
+
+  #footer-menu, .subscription {
+    padding-top: 15px;
+  }
+
+}

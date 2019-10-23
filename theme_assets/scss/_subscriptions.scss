@@ -1,0 +1,373 @@
+.manage-subscription-modal {
+  .modal-header {
+    .modal-title {
+      display: block;
+      height: 40px;
+      width: 28px;
+
+      .back-button {
+        background-image: url('/theme_assets/img/arrow-left.png');
+        display: block;
+        height: 100%;
+        width: 100%;
+        border: none;
+      }
+    }
+  }
+
+  .success-text {
+    text-align: center;
+  }
+
+  .error {
+    text-align: center;
+  }
+
+  .modal-content {
+    border-radius: 20px;
+  }
+
+  .action {
+    text-align: center;
+
+    .question {
+      margin-bottom: 50px;
+    }
+  }
+
+  .frequency-form {
+    .inputs {
+      margin-bottom: 10px;
+    }
+
+    .form-text {
+      margin-bottom: 10px;
+    }
+
+    .interval-length {
+      width: 60px;
+      height: 50px;
+      border-radius: 0px;
+      padding-left: 24px;
+      margin-left: 10px;
+    }
+
+    .interval-units {
+      height: 52px;
+      min-width: 200px;
+      padding-left: 25px;
+      margin-left: 10px;
+    }
+  }
+
+  .subscription-header {
+    margin-bottom: 20px;
+    text-align: center;
+
+    .status {
+      width: 100px;
+      margin-bottom: 11px;
+      padding: 8px;
+      border: 1px solid map-get($brand-blue, 'primary');;
+      border-radius: 4px;
+      background-color: hsla(209.873417721519, 83.21%, 92.06%, 1.00);
+      color: map-get($brand-blue, 'primary');
+      display: block;
+      margin: 0px auto;
+    }
+  }
+
+  .line-item-container {
+    margin-bottom: 15px;
+  }
+
+  .line-item-edit {
+    text-align: center;
+
+    .product-name {
+      text-transform: uppercase;
+    }
+
+    .product-image {
+      height: auto;
+      max-width: 80px;
+      margin-bottom: 10px;
+    }
+
+    .product-options {
+      .product-option, .quantity-section {
+        margin-top: 30px;
+
+        label {
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          font-size: 14px;
+          font-weight: 700;
+          margin-right: 10px;
+        }
+      }
+
+      .color {
+        display: inline-flex;
+      }
+
+      .quantity-section {
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        input {
+          width: 60px;
+          height: 50px;
+          border-radius: 0px;
+          padding-left: 24px;
+        }
+      }
+
+      select {
+        height: 60px;
+        min-width: 200px;
+        padding-left: 25px;
+      }
+
+      .required-message { display: none }
+
+      .product-option.error > label {
+        color: map-get($brand-red, 'primary');
+        .required-message {
+          display: inline;
+        }
+      }
+
+      .single-button {
+        display: inline;
+
+        label {
+          display: inline;
+          pointer: cursor;
+          margin: 0 5px;
+          border: 1px solid map-get($brand-gray, 'dark');
+        }
+
+        input[type="radio"] {
+          display: none;
+        }
+
+        input[type="radio"]:checked + label {
+          background-color: map-get($brand-blue, 'primary');
+          color: map-get($brand-white, 'primary');
+        }
+
+        input[type="radio"]:checked + label.color-swatch {
+          border-color: map-get($brand-black, 'primary');
+          border-width: 3px;
+        }
+
+      }
+    }
+  }
+}
+
+.subscription {
+  padding: 30px 0;
+  text-align: left;
+  border-bottom: 1px solid map-get($brand-white, 'primary');
+
+  .interval {
+    color: map-get($brand-blue, 'primary');
+    margin-left: 5px;
+  }
+
+  .line-item {
+    margin-bottom: 15px;
+    padding: 5px 15px 15px;
+    background-color: map-get($brand-tan, 'primary');
+    border-radius: 4px;
+
+    .attributes-container {
+      align-items: center;
+
+      .product-image {
+        height: auto;
+        width: 100%;
+      }
+
+      .item-attributes {
+        align-items: center;
+        height: 100%;
+
+        .item-option {
+          margin-top: 10px;
+          margin-bottom: 10px;
+
+          .presentation {
+            text-transform: uppercase;
+          }
+
+          .value {
+            border: 1px solid map-get($brand-gray, 'primary');
+            padding: 5px 10px;
+            margin-left: 5px;
+            color: map-get($brand-gray, 'dark');
+            border-radius: 4px;
+          }
+        }
+      }
+
+      .item-price {
+        color: map-get($brand-gray, 'dark');
+        font-weight: 700;
+      }
+    }
+
+    .edit-btn-container {
+      margin-top: 10px;
+    }
+  }
+
+  .subscription-billing-shipping {
+    text-align: center;
+  }
+
+  .action-links {
+    margin: 10px 0px;
+
+    .action-link {
+      display: block;
+      margin: 0px auto;
+      width: 100%;
+    }
+  }
+}
+
+.subscriptions-list {
+  padding: 25px 0;
+
+  @media screen and (min-width: 992px) {
+    padding: 50px  0;
+  }
+
+  .btn-quaternary {
+    padding: 2px 10px;
+  }
+
+  .no-subscriptions {
+    padding: 10px 0;
+  }
+}
+
+.modify-subscription-payment-modal {
+  .paypal-logo-container {
+    padding: 0 2px;
+     .paypal-logo {
+      width: 100%;
+    }
+  }
+   .payment-method-container {
+    padding: 0 2px;
+     .payment-method-image {
+      width: 100%;
+    }
+  }
+}
+
+.modify-subscription-modal {
+  .modal-content {
+    padding-top: 20px;
+    padding-bottom: 45px;
+    min-height: 500px;
+  }
+
+  .modify-modal-header {
+    text-align: center;
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  #delay-confirm-content {
+    padding-top: 20%;
+
+    #delayed-actionable-date {
+      padding-top: 10px;
+      padding-bottom: 30px;
+      font-size: 20px;
+      color: map-get($brand-gray, 'darkest');
+    }
+  }
+}
+
+.payment-and-adresses-container {
+  .delivery-row {
+    margin: 1rem 0;
+    background-color: map-get($brand-white, 'lightest');
+    border: 1px solid map-get($brand-white, 'primary');
+    padding: 1rem;
+
+    .delivery-option-wrapper {
+      margin: 0.5rem 0;
+
+      .delivery-option {
+        margin: 0 1rem 0 0;
+      }
+
+      p {
+        display: inline;
+      }
+    }
+  }
+
+  .form-item {
+    padding: 10px 0;
+  }
+
+  .payment-continue-info {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .paypal-button {
+    margin-top: 2rem;
+  }
+
+  .card-number,
+  .expiration-date,
+  .cvv {
+    height: 50px;
+    border-radius: 0px;
+  }
+
+  .checkout-continue {
+    padding: 25px 0;
+
+    .btn-primary {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .checkout-form-error {
+    color: map-get($brand-red, 'lighter');
+  }
+
+  .paypal-logo-container {
+    padding: 0 2px;
+
+    .paypal-logo {
+      width: 100%;
+    }
+  }
+
+  .address-form-outer-container {
+    border-right: solid 1px #eee;
+  }
+
+  .payment-method-container {
+    padding: 0 2px;
+
+    .payment-method-image {
+      width: 100%;
+    }
+  }
+}

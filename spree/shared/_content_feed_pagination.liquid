@@ -1,5 +1,14 @@
+{% unless posts.first_page? %}
+  <div class="col">
+    <a href="{{ posts | path_to_prev_page }}" class="prev-page-link">
+      &lt; Previous Page
+    </a>
+  </div>
+{% endunless %}
 {% unless posts.last_page? %}
-  <div class="pagination-container col-12 d-flex align-items-end justify-content-end">
-    <a class="next-page-link btn btn-primary" href="{% next_page_url %}">Next Page ></a>
+  <div class="col">
+    <a href="{{ posts | path_to_next_page }}" class="next-page-link">
+      Next Page &gt;
+    </a>
   </div>
 {% endunless %}
