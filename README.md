@@ -5,7 +5,7 @@ This is the Building Blocks theme for the Engine Commerce platform. We've create
 
 Helpful resources, development guides, theme docs, and API docs can be found at [developers.enginecommerce.com](https://developers.enginecommerce.com).
 
-**When your team started working with Engine, [a custom Slack channel](https://engine-ecommerce.slack.com/) was created for real-time support from the Engine developer support team. Reach out and say, "Hello! 👋" and let us know how it's going at any time.**
+**When your team started working with Engine, [a custom Slack channel](https://slack.com/) was created for real-time support from the Engine developer support team. Reach out and say, "Hello! 👋" and let us know how it's going at any time.**
 
 ## Get Started: Clone This Theme
 
@@ -16,11 +16,11 @@ cd ./building-blocks-theme
 
 ---
 
-## Setup Crank Shaft Server Sync
+## Synchronize Your Local Theme With Your Store
 
-The Crank Shaft upload script is populated with secure credentials from your store server when you download a theme from an Engine Commerce store. There is a copy of the script in `/scripts/upload.sh` for reference.
+Engine is a hosted platform, but we've made it easy to work locally with your favorite dev tools. **To synchronize your local work with your store, use the Crank Shaft script, automatically contained in theme download .ZIP files**
 
-To set up Crank Shaft, we will download a starter theme from your store and use it with this git repo.
+When you download a theme from an Engine Commerce store, the Crank Shaft upload script is automatically populated with secure credentials from your store server. There is a copy of the script in `/scripts/upload.sh` only for reference.
 
 1. Install the dependency [fswatch](https://github.com/emcrisostomo/fswatch)
 2. Log into your store's admin dashboard, navigate to /admin/themes, and download the starter theme
