@@ -40,7 +40,7 @@ When files are saved while Crank Shaft is running, edits will be synchronized wi
 
 ---
 
-## The Structure of Engine Themes
+## Engine Theme Strucutre
 
 Engine Themes will have the following directory layout:
 
@@ -75,6 +75,12 @@ Engine Themes will have the following directory layout:
 Each folder in `spree` and `engine_cms` contains Liquid files that become the pages of a store. Reusable partials live in the `spree/shared` folder.
 
 `theme_assets` are the non-Liquid files that make up your theme, like JavaScript and CSS. Engine has native support for [SCSS](https://sass-lang.com/) and favors it over vanilla CSS. Also included are two JSON files that allow Engine operators to customize your theme.
+
+---
+
+## More Guides and Docs
+
+**We hope this repo and README help you get started, but there is much more help available to you. Helpful resources, development guides, theme docs, and API docs can be found at [developers.enginecommerce.com](https://developers.enginecommerce.com).**
 
 ---
 
