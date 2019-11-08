@@ -9,7 +9,7 @@
 # 2. Add the following function to your shell (bash or zsh):
 #   `function crank_shaft { fswatch -0 -1 . | xargs -0 -I $ ./upload.sh }`
 # 3. In the theme directory, run `crank_shaft`
-# 4. After about 30 seconds, edits saved in local files will appear on the site
+# 4. After about 15 seconds, edits saved in local files will appear on the site
 
 DATE=$(date +%Y%m%d%H%M%S)
 export DATE
