@@ -1,3 +1,5 @@
+<img src="https://repository-images.githubusercontent.com/179382354/7e1e3b00-0249-11ea-843b-87cd0285cb39" width="300">
+
 Engine Commerce Building Blocks Theme
 =======================================================================
 
